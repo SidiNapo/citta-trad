@@ -20,49 +20,53 @@ const items: NavItem[] = [
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="container relative flex h-18 items-center justify-end gap-4 md:h-16 md:justify-between">
-        {/* Mobile: logo centered. Desktop: logo on the start. */}
-        <a
-          href="#home"
-          className={cn(
-            "flex items-center gap-3",
-            "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
-            "md:static md:translate-x-0 md:translate-y-0",
-          )}
-          aria-label="Citta-Trad"
-        >
-          <img
-            src={logo}
-            alt="شعار Citta-Trad"
-            className="h-16 w-auto sm:h-12 md:h-11"
-            loading="eager"
-          />
-          <div className="hidden sm:block">
-            <div className="text-sm font-semibold">Citta‑Trad</div>
-            <div className="text-xs text-muted-foreground">خدمة إعداد ملفات الجنسية الإيطالية</div>
-          </div>
-        </a>
+      <div className="container h-18 md:h-16">
+        <div className="grid h-full grid-cols-[1fr_auto_1fr] items-center gap-3 md:flex md:justify-between">
+          {/* Mobile: left spacer for perfect centering */}
+          <div className="hidden md:block" />
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="القائمة الرئيسية">
-          {items.map((it) => (
-            <Button key={it.href} asChild variant="ghost" className="rounded-full">
-              <a href={it.href} className={cn("flex items-center gap-2")}> 
-                <it.icon className="h-4 w-4" />
-                <span className="text-sm">{it.label}</span>
+          {/* Logo: centered on mobile, start on desktop */}
+          <a href="#home" className="justify-self-center md:justify-self-auto" aria-label="Citta-Trad">
+            <div className="flex items-center gap-3">
+              <img
+                src={logo}
+                alt="شعار Citta-Trad"
+                className="h-16 w-auto sm:h-12 md:h-11"
+                loading="eager"
+              />
+              <div className="hidden sm:block">
+                <div className="text-sm font-semibold">Citta‑Trad</div>
+                <div className="text-xs text-muted-foreground">خدمة إعداد ملفات الجنسية الإيطالية</div>
+              </div>
+            </div>
+          </a>
+
+          <nav className="hidden items-center gap-1 md:flex" aria-label="القائمة الرئيسية">
+            {items.map((it) => (
+              <Button key={it.href} asChild variant="ghost" className="rounded-full">
+                <a href={it.href} className={cn("flex items-center gap-2")}>
+                  <it.icon className="h-4 w-4" />
+                  <span className="text-sm">{it.label}</span>
+                </a>
+              </Button>
+            ))}
+          </nav>
+
+          {/* Right side actions (mobile stays right, never overlaps logo) */}
+          <div className="flex items-center justify-self-end gap-2">
+            <MobileNav items={items} />
+            <Button
+              asChild
+              variant="hero"
+              size="pill"
+              className="rounded-full shadow-elegant h-9 px-4 text-sm md:h-11 md:px-6 md:text-base"
+            >
+              <a href="#service" aria-label="اكتشف الخدمة">
+                <FileText className="h-4 w-4" />
+                <span className="font-semibold">ابدأ دابا</span>
               </a>
             </Button>
-          ))}
-        </nav>
-
-        {/* Right side actions (mobile menu button stays right) */}
-        <div className="z-20 flex items-center gap-2">
-          <MobileNav items={items} />
-          <Button asChild variant="hero" size="pill" className="rounded-full shadow-elegant">
-            <a href="#service" aria-label="اكتشف الخدمة">
-              <FileText className="h-4 w-4" />
-              <span className="font-semibold">ابدأ دابا</span>
-            </a>
-          </Button>
+          </div>
         </div>
       </div>
     </header>
