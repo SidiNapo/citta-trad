@@ -26,6 +26,8 @@ import { SectionShell } from "@/components/citta/SectionShell";
 import { SiteHeader } from "@/components/citta/SiteHeader";
 import { TypedWords } from "@/components/citta/TypedWords";
 import { WhatsappFloat } from "@/components/citta/WhatsappFloat";
+import logo from "@/assets/citta-trad-logo.png";
+import { HeroBrandMark } from "@/components/citta/HeroBrandMark";
 const WHATSAPP_PHONE = "+212725989892";
 const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفادة من خدمة إعداد ملفات الجنسية الإيطالية.";
 const Index = () => {
@@ -77,6 +79,7 @@ const Index = () => {
               <div className="container pt-20 md:pt-28">
                 <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
                   <Reveal className="max-w-2xl">
+                    <HeroBrandMark className="mb-5" logoSrc={logo} />
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge className="rounded-full" variant="secondary">
                         خدمة موجهة للمغاربة المقيمين بإيطاليا
