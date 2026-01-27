@@ -29,18 +29,25 @@ import { WhatsappFloat } from "@/components/citta/WhatsappFloat";
 const WHATSAPP_PHONE = "+212725989892";
 const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفادة من خدمة إعداد ملفات الجنسية الإيطالية.";
 const Index = () => {
-  const heroImages = React.useMemo(
-    () => [
-      { src: heroVenice, alt: "البندقية – إيطاليا (قنوات وجسور)" },
-      { src: heroRome, alt: "روما – إيطاليا (معالم تاريخية)" },
-      { src: heroFlorence, alt: "فلورنسا – إيطاليا (منظر بانورامي)" },
-      { src: heroMilan, alt: "ميلانو – إيطاليا (أفق المدينة)" },
-      { src: heroAmalfi, alt: "ساحل أمالفي – إيطاليا (البحر والجبال)" },
-      { src: heroTuscany, alt: "توسكانا – إيطاليا (تلال وسرو)" },
-    ],
-    [],
-  );
-
+  const heroImages = React.useMemo(() => [{
+    src: heroVenice,
+    alt: "البندقية – إيطاليا (قنوات وجسور)"
+  }, {
+    src: heroRome,
+    alt: "روما – إيطاليا (معالم تاريخية)"
+  }, {
+    src: heroFlorence,
+    alt: "فلورنسا – إيطاليا (منظر بانورامي)"
+  }, {
+    src: heroMilan,
+    alt: "ميلانو – إيطاليا (أفق المدينة)"
+  }, {
+    src: heroAmalfi,
+    alt: "ساحل أمالفي – إيطاليا (البحر والجبال)"
+  }, {
+    src: heroTuscany,
+    alt: "توسكانا – إيطاليا (تلال وسرو)"
+  }], []);
   const heroRef = React.useRef<HTMLElement | null>(null);
   React.useEffect(() => {
     const el = heroRef.current;
@@ -79,18 +86,18 @@ const Index = () => {
                       </Badge>
                     </div>
 
-                    <h1 className="headline-premium mt-5 text-4xl font-semibold tracking-tight md:text-6xl">
+                    <h1 className="headline-premium mt-5 text-4xl font-semibold tracking-tight md:text-6xl text-red-600">
                       إعداد ملفات الجنسية الإيطالية
-                      <span className="block text-muted-foreground">بأسلوب راقٍ… وبلا صداع راس.</span>
+                      <span className="block text-primary">بأسلوب راقٍ… وبلا صداع راس.</span>
                     </h1>
 
-                    <p className="mt-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
+                    <p className="mt-5 text-lg leading-relaxed md:text-xl text-secondary-foreground">
                       <span className="font-semibold text-foreground">Citta‑Trad</span> كنواكبك من المغرب حتى إيطاليا:
                       جمع الوثائق، تصحيح المعطيات، الأبوستيل، الترجمة المحلّفة، وترتيب الملف… ثم الإرسال الآمن.
                     </p>
 
                     <div className="mt-6 text-lg md:text-xl">
-                      <span className="text-muted-foreground">جمل دارجة ترحيبية: </span>
+                      <span className="text-secondary-foreground font-semibold">جمل دارجة ترحيبية: </span>
                       <TypedWords words={["حنا هنا غير تهنى 😉", "غير ب كليك كلشي بين يديك ⚡", "شبيك لبيك، الخدمة بين يديك ✨"]} className="font-semibold text-foreground" />
                     </div>
 
