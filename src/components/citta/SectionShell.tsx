@@ -12,8 +12,17 @@ type Props = {
 
 export function SectionShell({ id, eyebrow, title, children, className }: Props) {
   return (
-    <section id={id} className={cn("py-16 md:py-24", className)}>
-      <div className="container">
+    <section id={id} className={cn("relative overflow-hidden py-16 md:py-24", className)}>
+      {/* Subtle modern Italian-flag ambience (backgrounds) */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-flag-field opacity-70"
+        initial={{ opacity: 0, scale: 1.02 }}
+        whileInView={{ opacity: 0.7, scale: 1 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
+      />
+      <div className="relative container">
         <motion.header
           className="mb-10 max-w-3xl"
           initial={{ opacity: 0, y: 20 }}

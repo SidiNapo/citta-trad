@@ -6,10 +6,10 @@ import { Separator } from "@/components/ui/separator";
 import { CheckCircle2, Send, ShieldCheck, Sparkles } from "lucide-react";
 import heroVenice from "@/assets/hero-venice.jpg";
 import heroRome from "@/assets/hero-rome.jpg";
-import heroGreece from "@/assets/hero-greece.jpg";
 import heroFlorence from "@/assets/hero-florence.jpg";
 import heroMilan from "@/assets/hero-milan.jpg";
 import heroAmalfi from "@/assets/hero-amalfi.jpg";
+import heroTuscany from "@/assets/hero-tuscany.jpg";
 import docImg from "@/assets/section-documents.jpg";
 import apostilleImg from "@/assets/section-apostille.jpg";
 import translationImg from "@/assets/section-translation.jpg";
@@ -36,7 +36,7 @@ const Index = () => {
       { src: heroFlorence, alt: "فلورنسا – إيطاليا (منظر بانورامي)" },
       { src: heroMilan, alt: "ميلانو – إيطاليا (أفق المدينة)" },
       { src: heroAmalfi, alt: "ساحل أمالفي – إيطاليا (البحر والجبال)" },
-      { src: heroGreece, alt: "مشهد متوسطي قريب من أجواء السفر" },
+      { src: heroTuscany, alt: "توسكانا – إيطاليا (تلال وسرو)" },
     ],
     [],
   );
