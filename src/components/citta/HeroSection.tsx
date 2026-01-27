@@ -10,7 +10,6 @@ type HeroImage = {
   src: string;
   alt: string;
 };
-
 export type HeroFeatureKey = "organize" | "translate" | "ship";
 type Props = {
   images: HeroImage[];
@@ -88,7 +87,7 @@ export function HeroSection({
             }} transition={reduced ? undefined : {
               duration: 0.9,
               ease: [0.2, 0.8, 0.2, 1]
-             }} className="mx-auto max-w-3xl text-center">
+            }} className="mx-auto max-w-3xl text-center">
                 {/* Brand */}
                 <div className="mb-6 flex justify-center">
                   <HeroBrandMark logoSrc={logoSrc} tagline="" logoClassName="h-16 sm:h-20 md:h-24" nameClassName="text-lg sm:text-xl md:text-2xl" className="px-5 py-4"
@@ -109,7 +108,7 @@ export function HeroSection({
                   <span className="block">بوابتك نحو الجنسية الإيطالية</span>
                 </h1>
 
-                <p className="mt-4 text-lg leading-relaxed md:text-xl text-muted-foreground">
+                <p className="mt-4 text-lg leading-relaxed md:text-xl text-muted-foreground font-medium text-center">
                   خدمة شاملة للمغاربة المقيمين بإيطاليا
                 </p>
 
@@ -143,11 +142,7 @@ export function HeroSection({
                 }, {
                   title: "إرسال آمن",
                   desc: "بالبريد السريع"
-                }].map((f, idx) => <motion.button type="button" key={f.title} aria-label={`تفاصيل: ${f.title}`} onClick={() => onFeatureSelect?.(([
-                "organize",
-                "translate",
-                "ship"
-              ][idx] as HeroFeatureKey))} className="h-full text-right sm:text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" initial={reduced ? undefined : {
+                }].map((f, idx) => <motion.button type="button" key={f.title} aria-label={`تفاصيل: ${f.title}`} onClick={() => onFeatureSelect?.(["organize", "translate", "ship"][idx] as HeroFeatureKey)} className="h-full text-right sm:text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" initial={reduced ? undefined : {
                   opacity: 0,
                   y: 14,
                   scale: 0.98
