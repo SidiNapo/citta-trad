@@ -65,76 +65,122 @@ export function AboutShowcase({ title, description, bullets, steps, images, clas
         <div className="pointer-events-none absolute inset-0 bg-hero-field opacity-60" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-background/60" />
 
-        <div className="relative grid gap-4">
-          <div className="grid grid-cols-12 gap-4">
+        {/* Mobile-first: stacked cinematic tiles. Desktop: staggered collage. */}
+        <div className="relative grid gap-3 sm:gap-4">
+          <div className="grid gap-3 sm:grid-cols-12 sm:gap-4">
             <motion.div
-              className="col-span-7 overflow-hidden rounded-2xl border bg-card/40"
-              initial={{ opacity: 0, y: 14, rotate: -1 }}
+              className={cn(
+                "group relative overflow-hidden rounded-2xl border bg-card/40",
+                "sm:col-span-7",
+                "shadow-elegant",
+              )}
+              initial={{ opacity: 0, y: 18, rotate: -1 }}
               whileInView={{ opacity: 1, y: 0, rotate: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+              transition={{ duration: 0.75, ease: [0.2, 0.8, 0.2, 1] }}
             >
               <img
                 src={images[0]?.src}
                 alt={images[0]?.alt}
                 loading="lazy"
-                className="h-56 w-full object-cover"
+                className={cn(
+                  "w-full object-cover",
+                  "h-52 sm:h-56",
+                  "transition-transform duration-700 will-change-transform",
+                  "group-hover:scale-[1.03]",
+                )}
               />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute -inset-24 opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden>
+                <div className="h-full w-full bg-hero-field" />
+              </div>
             </motion.div>
 
             <motion.div
-              className="col-span-5 overflow-hidden rounded-2xl border bg-card/40"
-              initial={{ opacity: 0, y: 18, rotate: 1 }}
+              className={cn(
+                "group relative overflow-hidden rounded-2xl border bg-card/40",
+                "sm:col-span-5",
+                "shadow-elegant",
+              )}
+              initial={{ opacity: 0, y: 22, rotate: 1 }}
               whileInView={{ opacity: 1, y: 0, rotate: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.75, delay: 0.05, ease: [0.2, 0.8, 0.2, 1] }}
+              transition={{ duration: 0.78, delay: 0.06, ease: [0.2, 0.8, 0.2, 1] }}
             >
               <img
                 src={images[1]?.src}
                 alt={images[1]?.alt}
                 loading="lazy"
-                className="h-56 w-full object-cover"
+                className={cn(
+                  "w-full object-cover",
+                  "h-44 sm:h-56",
+                  "transition-transform duration-700 will-change-transform",
+                  "group-hover:scale-[1.03]",
+                )}
               />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent" />
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-12 gap-4">
+          <div className="grid gap-3 sm:grid-cols-12 sm:gap-4">
             <motion.div
-              className="col-span-5 overflow-hidden rounded-2xl border bg-card/40"
-              initial={{ opacity: 0, y: 20, rotate: -1 }}
+              className={cn(
+                "group relative overflow-hidden rounded-2xl border bg-card/40",
+                "sm:col-span-5",
+                "shadow-elegant",
+              )}
+              initial={{ opacity: 0, y: 22, rotate: -1 }}
               whileInView={{ opacity: 1, y: 0, rotate: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.75, delay: 0.08, ease: [0.2, 0.8, 0.2, 1] }}
+              transition={{ duration: 0.78, delay: 0.08, ease: [0.2, 0.8, 0.2, 1] }}
             >
               <img
                 src={images[2]?.src}
                 alt={images[2]?.alt}
                 loading="lazy"
-                className="h-48 w-full object-cover"
+                className={cn(
+                  "w-full object-cover",
+                  "h-44 sm:h-48",
+                  "transition-transform duration-700 will-change-transform",
+                  "group-hover:scale-[1.03]",
+                )}
               />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent" />
             </motion.div>
 
-            <div className="col-span-7 grid gap-4">
+            <div className="grid gap-3 sm:col-span-7 sm:gap-4">
               <motion.div
-                className="rounded-2xl border bg-card/60 p-4"
+                className="rounded-2xl border bg-card/60 p-4 shadow-elegant"
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: 0.12, ease: [0.2, 0.8, 0.2, 1] }}
+                transition={{ duration: 0.72, delay: 0.12, ease: [0.2, 0.8, 0.2, 1] }}
               >
-                <div className="text-sm font-semibold">منهجية واضحة</div>
-                <div className="mt-1 text-sm text-muted-foreground">تدقيق → ملاءمة → أبوستيل → ترجمة → ترتيب → إرسال</div>
+                <div className="flex items-center justify-between gap-3">
+                  <div className="text-sm font-semibold">منهجية واضحة</div>
+                  <div className="rounded-full border bg-background/50 px-3 py-1 text-[11px] font-semibold text-muted-foreground">
+                    نظام • بلا عشوائية
+                  </div>
+                </div>
+                <div className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  تدقيق → ملاءمة → أبوستيل → ترجمة → ترتيب → إرسال
+                </div>
               </motion.div>
 
               <motion.div
-                className="rounded-2xl border bg-card/60 p-4"
+                className="rounded-2xl border bg-card/60 p-4 shadow-elegant"
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: 0.18, ease: [0.2, 0.8, 0.2, 1] }}
+                transition={{ duration: 0.72, delay: 0.18, ease: [0.2, 0.8, 0.2, 1] }}
               >
-                <div className="text-sm font-semibold">نتيجة مرتبة</div>
-                <div className="mt-1 text-sm text-muted-foreground">ملف كيبان رسمي ومُحكَم من أول نظرة</div>
+                <div className="flex items-center justify-between gap-3">
+                  <div className="text-sm font-semibold">نتيجة مرتبة</div>
+                  <div className="rounded-full border bg-background/50 px-3 py-1 text-[11px] font-semibold text-muted-foreground">
+                    جاهز للإرسال
+                  </div>
+                </div>
+                <div className="mt-2 text-sm leading-relaxed text-muted-foreground">ملف كيبان رسمي ومُحكَم من أول نظرة</div>
               </motion.div>
             </div>
           </div>

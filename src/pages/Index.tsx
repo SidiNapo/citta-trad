@@ -10,8 +10,8 @@ import heroMilan from "@/assets/hero-milan.jpg";
 import heroAmalfi from "@/assets/hero-amalfi.jpg";
 import heroTuscany from "@/assets/hero-tuscany.jpg";
 import aboutOfficeImg from "@/assets/about-office.jpg";
-import aboutPrecisionImg from "@/assets/about-precision.jpg";
 import aboutDocsImg from "@/assets/about-documents.jpg";
+import apostilleImg from "@/assets/section-apostille.jpg";
 import { AboutShowcase } from "@/components/citta/AboutShowcase";
 import { Reveal } from "@/components/citta/Reveal";
 import { ScrollArrows } from "@/components/citta/ScrollArrows";
@@ -82,9 +82,9 @@ const Index = () => {
             src: aboutOfficeImg,
             alt: "مكتب إيطالي راقي مع وثائق رسمية"
           }, {
-            src: aboutPrecisionImg,
-            alt: "ساعة سويسرية تمثل الدقة والتنظيم"
-          }, {
+              src: apostilleImg,
+              alt: "توثيق وأبوستيل للوثائق بشكل رسمي"
+            }, {
             src: aboutDocsImg,
             alt: "ملف جنسية إيطالية مرتب بختم ذهبي"
           }]} />
