@@ -30,18 +30,68 @@ const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفا
 const Index = () => {
   const heroRef = React.useRef<HTMLElement | null>(null);
 
+  const typedWords = React.useMemo(
+    () => ["حنا هنا غير تهنى 😉", "غير ب كليك كلشي بين يديك ⚡", "شبيك لبيك، الخدمة بين يديك ✨"],
+    [],
+  );
+
+  const jsonLd = React.useMemo(() => {
+    const url = typeof window !== "undefined" ? window.location.origin : "";
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          name: "Citta‑Trad",
+          url,
+          description:
+            "خدمة إعداد ملفات الجنسية الإيطالية للمغاربة المقيمين بإيطاليا: جمع الوثائق، الترجمة المحلّفة، الأبوستيل، ترتيب الملف والإرسال الآمن.",
+        },
+        {
+          "@type": "Service",
+          name: "إعداد ملفات الجنسية الإيطالية",
+          provider: { "@type": "Organization", name: "Citta‑Trad" },
+          areaServed: [
+            { "@type": "Country", name: "Italy" },
+            { "@type": "Country", name: "Morocco" },
+          ],
+          audience: { "@type": "Audience", audienceType: "Moroccans in Italy" },
+          description:
+            "مساعدة إدارية شاملة: جمع الوثائق، تدقيق المعطيات، ترجمة محلفة، أبوستيل، ترتيب الملف وإرساله بسرعة وأمان.",
+        },
+      ],
+    };
+  }, []);
+
   React.useEffect(() => {
     const el = heroRef.current;
     if (!el) return;
-    const onMove = (e: PointerEvent) => {
+
+    // Avoid jitter on touch devices; throttle via rAF on fine pointers only.
+    const fine = window.matchMedia?.("(pointer: fine)")?.matches ?? false;
+    if (!fine) return;
+
+    let raf = 0;
+    let lastEvent: PointerEvent | null = null;
+    const tick = () => {
+      raf = 0;
+      if (!lastEvent) return;
+      const e = lastEvent;
       const r = el.getBoundingClientRect();
       const x = ((e.clientX - r.left) / r.width) * 100;
       const y = ((e.clientY - r.top) / r.height) * 100;
       el.style.setProperty("--mx", `${x.toFixed(2)}%`);
       el.style.setProperty("--my", `${y.toFixed(2)}%`);
     };
-    el.addEventListener("pointermove", onMove);
-    return () => el.removeEventListener("pointermove", onMove);
+    const onMove = (e: PointerEvent) => {
+      lastEvent = e;
+      if (!raf) raf = window.requestAnimationFrame(tick);
+    };
+    el.addEventListener("pointermove", onMove, { passive: true });
+    return () => {
+      el.removeEventListener("pointermove", onMove);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
@@ -49,6 +99,9 @@ const Index = () => {
       <SiteHeader />
 
       <main>
+        {/* SEO: structured data */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
         {/* HERO */}
         <section
           id="home"
@@ -58,7 +111,7 @@ const Index = () => {
           className="relative overflow-hidden"
           aria-label="الواجهة الرئيسية"
         >
-          <div className="relative min-h-[96vh]">
+          <div className="relative min-h-[92svh] md:min-h-[96vh]">
             <HeroVideo src={heroVideo} className="fade-mask" />
 
             <div className="relative z-10">
@@ -87,11 +140,7 @@ const Index = () => {
                     <div className="mt-6 text-lg md:text-xl">
                       <span className="text-muted-foreground">جمل دارجة ترحيبية: </span>
                       <TypedWords
-                        words={[
-                          "حنا هنا غير تهنى 😉",
-                          "غير ب كليك كلشي بين يديك ⚡",
-                          "شبيك لبيك، الخدمة بين يديك ✨",
-                        ]}
+                        words={typedWords}
                         className="font-semibold text-foreground"
                       />
                     </div>
