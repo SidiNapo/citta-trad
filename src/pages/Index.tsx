@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle2, Send } from "lucide-react";
+import { CheckCircle2, MessageCircle, Send, ShieldCheck, Timer } from "lucide-react";
 import heroVenice from "@/assets/hero-venice.jpg";
 import heroRome from "@/assets/hero-rome.jpg";
 import heroFlorence from "@/assets/hero-florence.jpg";
@@ -143,17 +143,60 @@ const Index = () => {
         <SectionShell id="contact" eyebrow="📞 تواصل معنا" title="تواصل معنا — واتساب سريع وواضح">
           <div className="grid gap-6 lg:grid-cols-2">
             <Reveal>
-              <Card className="p-6 shadow-elegant">
-              
-              
-              <div className="mt-5">
-                <Button asChild variant="hero" size="pill" className="w-full justify-center gap-2 md:w-auto">
-                  <a href={`https://wa.me/${WHATSAPP_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`} target="_blank" rel="noreferrer" aria-label="فتح واتساب للتواصل">
-                    <Send className="h-4 w-4" />
-                    فتح واتساب الآن
-                  </a>
-                </Button>
-              </div>
+              <Card className="surface-glass relative overflow-hidden p-6">
+                {/* subtle accent */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"
+                />
+
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border bg-background/60">
+                        <MessageCircle className="h-4 w-4" />
+                      </span>
+                      <h3 className="text-lg font-semibold">واتساب فقط</h3>
+                    </div>
+
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      تواصل مباشر وسريع — كنردّو عليك بأوضح طريقة وبلا تعقيد.
+                    </p>
+                  </div>
+
+                  <div className="hidden shrink-0 sm:flex">
+                    <div className="rounded-full border bg-background/60 px-3 py-1 text-xs font-semibold">
+                      ردّ سريع
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                  {[{ icon: Timer, t: "سريع" }, { icon: ShieldCheck, t: "آمن" }, { icon: Send, t: "مباشر" }].map((it) => (
+                    <div key={it.t} className="flex items-center gap-2 rounded-xl border bg-background/50 px-3 py-2">
+                      <it.icon className="h-4 w-4" />
+                      <span className="text-xs font-semibold">{it.t}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <Button asChild variant="whatsapp" size="pill" className="w-full justify-center gap-2 sm:w-auto">
+                    <a
+                      href={`https://wa.me/${WHATSAPP_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="فتح واتساب للتواصل"
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      فتح واتساب الآن
+                    </a>
+                  </Button>
+
+                  <p className="text-xs text-muted-foreground">
+                    ما كنبيّنوْش الرقم هنا — كيتحل غير فواتساب.
+                  </p>
+                </div>
               </Card>
             </Reveal>
 
