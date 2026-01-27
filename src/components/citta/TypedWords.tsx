@@ -26,79 +26,23 @@ function usePrefersReducedMotion() {
 export function TypedWords({
   words,
   className,
+  // kept for backwards-compatibility; animation is intentionally disabled
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   typingMs = 34,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   deletingMs = 22,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   holdMs = 1100,
 }: Props) {
-  const reduced = usePrefersReducedMotion();
-  const [wordIndex, setWordIndex] = React.useState(0);
-  const [text, setText] = React.useState("");
-  const [phase, setPhase] = React.useState<"typing" | "holding" | "deleting">("typing");
-
-  const activeRef = React.useRef(true);
-  React.useEffect(() => {
-    activeRef.current = true;
-    return () => {
-      activeRef.current = false;
-    };
-  }, []);
-
-  React.useEffect(() => {
-    if (reduced) {
-      setText(words[0] ?? "");
-      return;
-    }
-
-    const current = words[wordIndex] ?? "";
-    let t: number | undefined;
-
-    // Guard against StrictMode double-invocation timing overlaps
-    const safeSetText = (v: string) => {
-      if (activeRef.current) setText(v);
-    };
-    const safeSetPhase = (v: "typing" | "holding" | "deleting") => {
-      if (activeRef.current) setPhase(v);
-    };
-    const safeSetWordIndex = (fn: (i: number) => number) => {
-      if (activeRef.current) setWordIndex(fn);
-    };
-
-    if (phase === "typing") {
-      if (text.length < current.length) {
-        t = window.setTimeout(() => safeSetText(current.slice(0, text.length + 1)), typingMs);
-      } else {
-        safeSetPhase("holding");
-      }
-    } else if (phase === "holding") {
-      t = window.setTimeout(() => safeSetPhase("deleting"), holdMs);
-    } else {
-      if (text.length > 0) {
-        t = window.setTimeout(() => safeSetText(text.slice(0, -1)), deletingMs);
-      } else {
-        safeSetPhase("typing");
-        safeSetWordIndex((i) => (i + 1) % Math.max(words.length, 1));
-      }
-    }
-    return () => {
-      if (t) window.clearTimeout(t);
-    };
-  }, [deletingMs, holdMs, phase, reduced, text, typingMs, wordIndex, words]);
+  // Animation removed by request: keep a stable, premium static line in the hero.
+  // Still respects reduced motion and avoids any client-side timers.
+  // (We keep usePrefersReducedMotion to avoid future regressions if animation is reintroduced.)
+  usePrefersReducedMotion();
+  const text = React.useMemo(() => words[0] ?? "", [words]);
 
   return (
     <span className={className}>
       <span>{text}</span>
-      {!reduced && (
-        <span
-          aria-hidden
-          className="inline-block w-[0.6ch] translate-y-[0.1em] animate-[blink_1s_steps(2,end)_infinite]"
-          style={{
-            background: "currentColor",
-            height: "1.05em",
-            marginInlineStart: "0.1em",
-          }}
-        />
-      )}
-      <style>{"@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}"}</style>
     </span>
   );
 }
