@@ -4,7 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { CheckCircle2, Send, ShieldCheck, Sparkles } from "lucide-react";
-import heroVideo from "@/assets/hero-italy-premium.mp4";
+import heroVenice from "@/assets/hero-venice.jpg";
+import heroRome from "@/assets/hero-rome.jpg";
+import heroGreece from "@/assets/hero-greece.jpg";
+import heroFlorence from "@/assets/hero-florence.jpg";
+import heroMilan from "@/assets/hero-milan.jpg";
+import heroAmalfi from "@/assets/hero-amalfi.jpg";
 import docImg from "@/assets/section-documents.jpg";
 import apostilleImg from "@/assets/section-apostille.jpg";
 import translationImg from "@/assets/section-translation.jpg";
@@ -13,7 +18,7 @@ import aboutOfficeImg from "@/assets/about-office.jpg";
 import aboutPrecisionImg from "@/assets/about-precision.jpg";
 import aboutDocsImg from "@/assets/about-documents.jpg";
 import { AboutShowcase } from "@/components/citta/AboutShowcase";
-import { HeroVideo } from "@/components/citta/HeroVideo";
+import { HeroSlideshow } from "@/components/citta/HeroSlideshow";
 import { MediaCard } from "@/components/citta/MediaCard";
 import { Reveal } from "@/components/citta/Reveal";
 import { ScrollArrows } from "@/components/citta/ScrollArrows";
@@ -24,6 +29,18 @@ import { WhatsappFloat } from "@/components/citta/WhatsappFloat";
 const WHATSAPP_PHONE = "+212725989892";
 const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفادة من خدمة إعداد ملفات الجنسية الإيطالية.";
 const Index = () => {
+  const heroImages = React.useMemo(
+    () => [
+      { src: heroVenice, alt: "البندقية – إيطاليا (قنوات وجسور)" },
+      { src: heroRome, alt: "روما – إيطاليا (معالم تاريخية)" },
+      { src: heroFlorence, alt: "فلورنسا – إيطاليا (منظر بانورامي)" },
+      { src: heroMilan, alt: "ميلانو – إيطاليا (أفق المدينة)" },
+      { src: heroAmalfi, alt: "ساحل أمالفي – إيطاليا (البحر والجبال)" },
+      { src: heroGreece, alt: "مشهد متوسطي قريب من أجواء السفر" },
+    ],
+    [],
+  );
+
   const heroRef = React.useRef<HTMLElement | null>(null);
   React.useEffect(() => {
     const el = heroRef.current;
@@ -47,7 +64,7 @@ const Index = () => {
         heroRef.current = n;
       }} className="relative isolate overflow-hidden" aria-label="الواجهة الرئيسية">
           <div className="relative min-h-[96vh]">
-            <HeroVideo src={heroVideo} className="fade-mask" />
+            <HeroSlideshow images={heroImages} intervalMs={5000} className="fade-mask" />
 
             <div className="relative z-10">
               <div className="container pt-20 md:pt-28">
