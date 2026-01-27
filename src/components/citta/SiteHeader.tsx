@@ -20,12 +20,12 @@ const items: NavItem[] = [
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="container flex h-16 items-center justify-between gap-4">
+      <div className="container flex h-18 items-center justify-between gap-4 md:h-16">
         <a href="#home" className="flex items-center gap-3" aria-label="Citta-Trad">
           <img
             src={logo}
             alt="شعار Citta-Trad"
-            className="h-12 w-auto sm:h-12 md:h-11"
+            className="h-14 w-auto sm:h-12 md:h-11"
             loading="eager"
           />
           <div className="hidden sm:block">
