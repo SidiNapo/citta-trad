@@ -33,11 +33,11 @@ export function HeroVideo({ src, poster, className }: Props) {
   const opacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.7, 0.3]);
 
   return (
-    <div ref={ref} className={cn("absolute inset-0", className)} aria-hidden>
+    <div ref={ref} className={cn("absolute inset-0 z-0 pointer-events-none", className)} aria-hidden>
       <motion.div className="absolute inset-0" style={{ y, opacity }}>
         {!reduced ? (
           <video
-            className="absolute inset-0 h-full w-full object-contain md:object-cover"
+            className="absolute inset-0 h-full w-full object-cover md:object-cover"
             src={src}
             poster={poster}
             autoPlay
@@ -51,9 +51,9 @@ export function HeroVideo({ src, poster, className }: Props) {
         )}
 
         {/* cinematic overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/20 to-background/80" />
-        <div className="absolute inset-0 hero-noise" />
-        <div className="absolute inset-0 bg-hero-field opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/20 to-background/85" />
+        <div className="absolute inset-0 hero-noise opacity-70 mix-blend-soft-light" />
+        <div className="absolute inset-0 bg-hero-field opacity-40 md:opacity-70" />
       </motion.div>
     </div>
   );

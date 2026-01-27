@@ -45,7 +45,7 @@ const Index = () => {
         {/* HERO */}
         <section id="home" ref={n => {
         heroRef.current = n;
-      }} className="relative overflow-hidden" aria-label="الواجهة الرئيسية">
+      }} className="relative isolate overflow-hidden" aria-label="الواجهة الرئيسية">
           <div className="relative min-h-[96vh]">
             <HeroVideo src={heroVideo} className="fade-mask" />
 
