@@ -18,7 +18,7 @@ const items: NavItem[] = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/70 backdrop-blur supports-[backdrop-filter]:bg-background/55">
+    <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="container flex h-16 items-center justify-between gap-4">
         <a href="#home" className="flex items-center gap-3" aria-label="Citta-Trad">
           <img src={logo} alt="شعار Citta-Trad" className="h-10 w-auto" loading="eager" />
@@ -40,7 +40,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button asChild variant="premium" size="pill" className="rounded-full">
+          <Button asChild variant="hero" size="pill" className="rounded-full shadow-elegant">
             <a href="#service" aria-label="اكتشف الخدمة">
               <FileText className="h-4 w-4" />
               <span className="font-semibold">ابدأ دابا</span>

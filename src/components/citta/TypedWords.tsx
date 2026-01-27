@@ -35,28 +35,48 @@ export function TypedWords({
   const [text, setText] = React.useState("");
   const [phase, setPhase] = React.useState<"typing" | "holding" | "deleting">("typing");
 
+  const activeRef = React.useRef(true);
+  React.useEffect(() => {
+    activeRef.current = true;
+    return () => {
+      activeRef.current = false;
+    };
+  }, []);
+
   React.useEffect(() => {
     if (reduced) {
       setText(words[0] ?? "");
       return;
     }
+
     const current = words[wordIndex] ?? "";
     let t: number | undefined;
 
+    // Guard against StrictMode double-invocation timing overlaps
+    const safeSetText = (v: string) => {
+      if (activeRef.current) setText(v);
+    };
+    const safeSetPhase = (v: "typing" | "holding" | "deleting") => {
+      if (activeRef.current) setPhase(v);
+    };
+    const safeSetWordIndex = (fn: (i: number) => number) => {
+      if (activeRef.current) setWordIndex(fn);
+    };
+
     if (phase === "typing") {
       if (text.length < current.length) {
-        t = window.setTimeout(() => setText(current.slice(0, text.length + 1)), typingMs);
+        t = window.setTimeout(() => safeSetText(current.slice(0, text.length + 1)), typingMs);
       } else {
-        setPhase("holding");
+        safeSetPhase("holding");
       }
     } else if (phase === "holding") {
-      t = window.setTimeout(() => setPhase("deleting"), holdMs);
+      t = window.setTimeout(() => safeSetPhase("deleting"), holdMs);
     } else {
       if (text.length > 0) {
-        t = window.setTimeout(() => setText(text.slice(0, -1)), deletingMs);
+        t = window.setTimeout(() => safeSetText(text.slice(0, -1)), deletingMs);
       } else {
-        setPhase("typing");
-        setWordIndex((i) => (i + 1) % Math.max(words.length, 1));
+        safeSetPhase("typing");
+        safeSetWordIndex((i) => (i + 1) % Math.max(words.length, 1));
       }
     }
     return () => {
