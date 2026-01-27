@@ -5,11 +5,15 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { CheckCircle2, Send, ShieldCheck, Sparkles } from "lucide-react";
 
-import venice from "@/assets/hero-venice.jpg";
-import rome from "@/assets/hero-rome.jpg";
-import greece from "@/assets/hero-greece.jpg";
+import heroVideo from "@/assets/hero-italy-premium.mp4";
+import docImg from "@/assets/section-documents.jpg";
+import apostilleImg from "@/assets/section-apostille.jpg";
+import translationImg from "@/assets/section-translation.jpg";
+import courierImg from "@/assets/section-courier.jpg";
 
-import { HeroSlideshow } from "@/components/citta/HeroSlideshow";
+import { HeroVideo } from "@/components/citta/HeroVideo";
+import { MediaCard } from "@/components/citta/MediaCard";
+import { Reveal } from "@/components/citta/Reveal";
 import { ScrollArrows } from "@/components/citta/ScrollArrows";
 import { SectionShell } from "@/components/citta/SectionShell";
 import { SiteHeader } from "@/components/citta/SiteHeader";
@@ -50,20 +54,13 @@ const Index = () => {
           className="relative overflow-hidden"
           aria-label="الواجهة الرئيسية"
         >
-          <div className="relative min-h-[92vh]">
-            <HeroSlideshow
-              images={[
-                { src: venice, alt: "قناة فينيسيا وقت الغروب" },
-                { src: rome, alt: "الكولوسيوم روما وقت الغروب" },
-                { src: greece, alt: "سانتوريني اليونان بإطلالة بحرية" },
-              ]}
-              intervalMs={8000}
-            />
+          <div className="relative min-h-[96vh]">
+            <HeroVideo src={heroVideo} className="fade-mask" />
 
             <div className="relative z-10">
               <div className="container pt-20 md:pt-28">
-                <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-                  <div className="max-w-2xl">
+                <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+                  <Reveal className="max-w-2xl">
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge className="rounded-full" variant="secondary">
                         خدمة موجهة للمغاربة المقيمين بإيطاليا
@@ -126,9 +123,9 @@ const Index = () => {
                         </Card>
                       ))}
                     </div>
-                  </div>
+                  </Reveal>
 
-                  <div className="lg:justify-self-end">
+                  <Reveal className="lg:justify-self-end">
                     <Card className="surface-glass p-6">
                       <div className="flex items-center gap-2">
                         <ShieldCheck className="h-5 w-5 text-primary" />
@@ -140,11 +137,7 @@ const Index = () => {
                       </p>
                       <Separator className="my-4" />
                       <ul className="space-y-3 text-sm">
-                        {[
-                          "حنا معاك خطوة بخطوة",
-                          "غير تهنى، كلشي عندنا",
-                          "الوقت ديالك محفوظ، الخدمة بلا صداع",
-                        ].map((t) => (
+                        {["حنا معاك خطوة بخطوة", "غير تهنى، كلشي عندنا", "الوقت ديالك محفوظ، الخدمة بلا صداع"].map((t) => (
                           <li key={t} className="flex items-start gap-2">
                             <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
                             <span>{t}</span>
@@ -152,7 +145,7 @@ const Index = () => {
                         ))}
                       </ul>
                     </Card>
-                  </div>
+                  </Reveal>
                 </div>
               </div>
             </div>
@@ -162,7 +155,8 @@ const Index = () => {
         {/* ABOUT */}
         <SectionShell id="about" eyebrow="ℹ️ من نحن" title="حنا فريق مختص… وخدمتنا منظمة بحال ساعة سويسرية">
           <div className="grid gap-6 lg:grid-cols-2">
-            <Card className="p-6 shadow-elegant">
+            <Reveal>
+              <Card className="p-6 shadow-elegant">
               <p className="text-base leading-relaxed text-muted-foreground">
                 حنا فريق مختص فالمساعدة الإدارية والاستشارة، كنواكب المغاربة المقيمين بإيطاليا فإعداد ملفات الجنسية
                 الإيطالية: جمع الوثائق، ترتيبها، ترجمتها ترجمة محلفة، والمصادقة عليها، مع إرسالها مباشرة إلى إيطاليا بكل
@@ -179,9 +173,11 @@ const Index = () => {
                   ),
                 )}
               </div>
-            </Card>
+              </Card>
+            </Reveal>
 
-            <Card className="surface-glass p-6">
+            <Reveal>
+              <Card className="surface-glass p-6">
               <h3 className="text-lg font-semibold">علاش Citta‑Trad؟ (سيو + وضوح)</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 لأن إعداد ملف الجنسية الإيطالية كيحتاج دقة فالأسماء، التواريخ، وترتيب الوثائق. أي خطأ بسيط يقدر يضيع
@@ -199,14 +195,63 @@ const Index = () => {
                   </div>
                 ))}
               </div>
-            </Card>
+              </Card>
+            </Reveal>
+          </div>
+        </SectionShell>
+
+        {/* KEY MOMENTS (Media + SEO) */}
+        <SectionShell
+          eyebrow="✨ لحظات الخدمة"
+          title="تفاصيل كتفرق: وثائقك كتمشي بحال ملف رسمي مُحكَم"
+          className="relative"
+        >
+          <div className="grid gap-6">
+            <Reveal>
+              <MediaCard
+                imageSrc={docImg}
+                imageAlt="تنظيم الوثائق على مكتب رخامي بلمسة إيطالية"
+                title="جمع الوثائق وتصحيح المعطيات"
+                description="كنجمعو الوثائق المطلوبة، وكنراجعو الأسماء والتواريخ بدقة باش يتفادى الملف أي تعارض. هاد المرحلة هي اللي كتختصر عليك وقت بزاف فإيطاليا."
+              />
+            </Reveal>
+
+            <Reveal>
+              <MediaCard
+                align="right"
+                imageSrc={apostilleImg}
+                imageAlt="أبوستيل وختم رسمي فوق وثائق"
+                title="الأبوستيل (Apostille) بلا تعقيدات"
+                description="كنواكبو المصادقة حيث لازمة: عند العمالة، ومن بعد على الترجمة فالمحكمة الابتدائية—باش الوثائق تكون مقبولة بالطريقة الصحيحة."
+              />
+            </Reveal>
+
+            <Reveal>
+              <MediaCard
+                imageSrc={translationImg}
+                imageAlt="مكتب ترجمة محلفة مع وثائق وختم"
+                title="ترجمة محلفة + مراجعة صارمة"
+                description="ترجمة محلفة خالية من الأخطاء مع مراجعة قبل المصادقة—حيت أي خطأ صغير يقدر يردّ الملف للور."
+              />
+            </Reveal>
+
+            <Reveal>
+              <MediaCard
+                align="right"
+                imageSrc={courierImg}
+                imageAlt="طرد بريد سريع مع لمسة إيطالية"
+                title="إرسال سريع وآمن"
+                description="كنرتبو الملف من جديد وكنسيفطوه للزبون عبر البريد السريع، باش توصل الوثائق فحالة ممتازة وبلا توتر."
+              />
+            </Reveal>
           </div>
         </SectionShell>
 
         {/* SERVICE */}
         <SectionShell id="service" eyebrow="🗂️ الخدمة" title="إعداد ملفات الجنسية الإيطالية — الخدمة كاملة من الألف للياء">
           <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-            <Card className="p-6 shadow-elegant">
+            <Reveal>
+              <Card className="p-6 shadow-elegant">
               <h3 className="text-lg font-semibold">🔹 تشمل الخدمة:</h3>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                 {[
@@ -236,9 +281,11 @@ const Index = () => {
                   ),
                 )}
               </div>
-            </Card>
+              </Card>
+            </Reveal>
 
-            <Card className="surface-glass p-6">
+            <Reveal>
+              <Card className="surface-glass p-6">
               <h3 className="text-lg font-semibold">كيفاش كنخدمو؟ (روتين واضح)</h3>
               <ol className="mt-4 space-y-3">
                 {[
@@ -264,14 +311,16 @@ const Index = () => {
                 هاد الصفحة معمولة باش تعاون الناس يفهمو الخدمة، وفيها كلمات مفتاحية مرتبطة بملف الجنسية الإيطالية، الترجمة
                 المحلفة، الأبوستيل، وتجهيز الوثائق للمغاربة المقيمين بإيطاليا — باش تقوّي السيو ديال الموقع بشكل طبيعي.
               </p>
-            </Card>
+              </Card>
+            </Reveal>
           </div>
         </SectionShell>
 
         {/* CONTACT */}
         <SectionShell id="contact" eyebrow="📞 تواصل معنا" title="تواصل معنا — واتساب سريع وواضح">
           <div className="grid gap-6 lg:grid-cols-2">
-            <Card className="p-6 shadow-elegant">
+            <Reveal>
+              <Card className="p-6 shadow-elegant">
               <h3 className="text-lg font-semibold">زر واتساب كبير وواضح</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 منين كتضغط، كيتحل واتساب مباشرة برسالة جاهزة. (الرقم ما كنكتبوهش فواجهة الصفحة للزوار).
@@ -294,9 +343,11 @@ const Index = () => {
                   </a>
                 </Button>
               </div>
-            </Card>
+              </Card>
+            </Reveal>
 
-            <Card className="surface-glass p-6">
+            <Reveal>
+              <Card className="surface-glass p-6">
               <h3 className="text-lg font-semibold">⚖️ نقطة قانونية</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 هذه الخدمة تقتصر على المساعدة الإدارية، جمع الوثائق وترجمتها حصريًا في إطار ملفات الجنسية الإيطالية، ولا
@@ -307,7 +358,8 @@ const Index = () => {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 © 2026 – جميع الحقوق محفوظة. يحظر نسخ أو إعادة استعمال محتوى هذه الصفحة بدون إذن.
               </p>
-            </Card>
+              </Card>
+            </Reveal>
           </div>
         </SectionShell>
       </main>
