@@ -150,24 +150,66 @@ export function HeroSection({ images, logoSrc, className }: Props) {
                       key={f.title}
                       initial={reduced ? undefined : { opacity: 0, y: 14, scale: 0.98 }}
                       animate={reduced ? undefined : { opacity: 1, y: 0, scale: 1 }}
+                      whileHover={reduced ? undefined : { y: -6, scale: 1.02 }}
+                      whileTap={reduced ? undefined : { scale: 0.99 }}
                       transition={
                         reduced
                           ? undefined
                           : { duration: 0.6, delay: 0.15 + idx * 0.08, ease: [0.2, 0.8, 0.2, 1] }
                       }
                     >
-                      <Card className="surface-glass relative overflow-hidden p-4">
+                      <Card className="surface-glass group relative overflow-hidden p-4 transition-[transform,box-shadow] duration-300 hover:shadow-elegant">
+                        {/* premium gradient border illusion */}
                         <div
                           aria-hidden
-                          className="pointer-events-none absolute inset-0 opacity-70"
+                          className="pointer-events-none absolute inset-0 opacity-80"
                           style={{
                             background:
-                              "linear-gradient(135deg, hsl(var(--primary) / 0.10), transparent 35%), linear-gradient(315deg, hsl(var(--accent) / 0.08), transparent 45%)",
+                              "linear-gradient(135deg, hsl(var(--primary) / 0.16), transparent 40%), linear-gradient(315deg, hsl(var(--accent) / 0.14), transparent 45%)",
                           }}
                         />
+
+                        {/* tricolore ribbon */}
+                        <div
+                          aria-hidden
+                          className="pointer-events-none absolute -top-10 left-0 right-0 h-14 opacity-90"
+                          style={{
+                            background:
+                              "linear-gradient(90deg, hsl(var(--primary) / 0.40), hsl(var(--background) / 0.10), hsl(var(--accent) / 0.35))",
+                          }}
+                        />
+
                         <div className="relative">
-                          <div className="text-sm font-semibold text-foreground">{f.title}</div>
-                          <div className="mt-1 text-sm text-muted-foreground">{f.desc}</div>
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <div className="text-sm font-semibold text-foreground">{f.title}</div>
+                              <div className="mt-1 text-sm text-muted-foreground">{f.desc}</div>
+                            </div>
+
+                            <div className="shrink-0">
+                              <div className="inline-flex items-center gap-2 rounded-full border bg-card/60 px-2.5 py-1 text-[11px] font-semibold text-muted-foreground">
+                                <span
+                                  aria-hidden
+                                  className="h-1.5 w-1.5 rounded-full"
+                                  style={{ background: "hsl(var(--primary))" }}
+                                />
+                                <span>{String(idx + 1).padStart(2, "0")}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div
+                            aria-hidden
+                            className="mt-3 h-1 w-full overflow-hidden rounded-full bg-secondary"
+                          >
+                            <div
+                              className="h-full w-full translate-x-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                              style={{
+                                background:
+                                  "linear-gradient(to left, hsl(var(--primary)), hsl(var(--background)), hsl(var(--accent)))",
+                              }}
+                            />
+                          </div>
                         </div>
                       </Card>
                     </motion.div>
