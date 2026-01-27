@@ -7,6 +7,8 @@ type Props = {
   brandName?: string;
   tagline?: string;
   className?: string;
+  logoClassName?: string;
+  nameClassName?: string;
 };
 
 export function HeroBrandMark({
@@ -14,6 +16,8 @@ export function HeroBrandMark({
   brandName = "Citta‑Trad",
   tagline = "خدمة إعداد ملفات الجنسية الإيطالية",
   className,
+  logoClassName,
+  nameClassName,
 }: Props) {
   const reduced = useReducedMotion();
 
@@ -45,7 +49,7 @@ export function HeroBrandMark({
         src={logoSrc}
         alt="شعار Citta‑Trad"
         loading="eager"
-        className="h-12 w-auto sm:h-14 md:h-16"
+        className={cn("h-12 w-auto sm:h-14 md:h-16", logoClassName)}
         animate={
           reduced
             ? undefined
@@ -59,13 +63,20 @@ export function HeroBrandMark({
 
       <div className="min-w-0">
         <div className="flex items-baseline gap-2">
-          <div className="truncate text-base font-semibold leading-none text-foreground sm:text-lg md:text-xl">
+          <div
+            className={cn(
+              "truncate text-base font-semibold leading-none text-foreground sm:text-lg md:text-xl",
+              nameClassName,
+            )}
+          >
             {brandName}
           </div>
           <span className="hidden text-xs font-semibold text-muted-foreground sm:inline">•</span>
           <div className="hidden text-xs font-medium text-muted-foreground sm:block">Italy</div>
         </div>
-        <div className="mt-1 line-clamp-1 text-xs text-muted-foreground sm:text-sm">{tagline}</div>
+        {tagline ? (
+          <div className="mt-1 line-clamp-1 text-xs text-muted-foreground sm:text-sm">{tagline}</div>
+        ) : null}
 
         {/* tricolore signature line */}
         <motion.div

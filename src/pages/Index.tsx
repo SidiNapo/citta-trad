@@ -1,33 +1,26 @@
 import * as React from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle2, Send, ShieldCheck, Sparkles } from "lucide-react";
+import { CheckCircle2, Send } from "lucide-react";
 import heroVenice from "@/assets/hero-venice.jpg";
 import heroRome from "@/assets/hero-rome.jpg";
 import heroFlorence from "@/assets/hero-florence.jpg";
 import heroMilan from "@/assets/hero-milan.jpg";
 import heroAmalfi from "@/assets/hero-amalfi.jpg";
 import heroTuscany from "@/assets/hero-tuscany.jpg";
-import docImg from "@/assets/section-documents.jpg";
-import apostilleImg from "@/assets/section-apostille.jpg";
-import translationImg from "@/assets/section-translation.jpg";
-import courierImg from "@/assets/section-courier.jpg";
 import aboutOfficeImg from "@/assets/about-office.jpg";
 import aboutPrecisionImg from "@/assets/about-precision.jpg";
 import aboutDocsImg from "@/assets/about-documents.jpg";
 import { AboutShowcase } from "@/components/citta/AboutShowcase";
-import { HeroSlideshow } from "@/components/citta/HeroSlideshow";
-import { MediaCard } from "@/components/citta/MediaCard";
 import { Reveal } from "@/components/citta/Reveal";
 import { ScrollArrows } from "@/components/citta/ScrollArrows";
 import { SectionShell } from "@/components/citta/SectionShell";
 import { SiteHeader } from "@/components/citta/SiteHeader";
-import { TypedWords } from "@/components/citta/TypedWords";
 import { WhatsappFloat } from "@/components/citta/WhatsappFloat";
 import logo from "@/assets/citta-trad-logo.png";
-import { HeroBrandMark } from "@/components/citta/HeroBrandMark";
+import { HeroSection } from "@/components/citta/HeroSection";
+import { PromiseBand } from "@/components/citta/PromiseBand";
 const WHATSAPP_PHONE = "+212725989892";
 const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفادة من خدمة إعداد ملفات الجنسية الإيطالية.";
 const Index = () => {
@@ -50,120 +43,15 @@ const Index = () => {
     src: heroTuscany,
     alt: "توسكانا – إيطاليا (تلال وسرو)"
   }], []);
-  const heroRef = React.useRef<HTMLElement | null>(null);
-  React.useEffect(() => {
-    const el = heroRef.current;
-    if (!el) return;
-    const onMove = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width * 100;
-      const y = (e.clientY - r.top) / r.height * 100;
-      el.style.setProperty("--mx", `${x.toFixed(2)}%`);
-      el.style.setProperty("--my", `${y.toFixed(2)}%`);
-    };
-    el.addEventListener("pointermove", onMove);
-    return () => el.removeEventListener("pointermove", onMove);
-  }, []);
   return <div className="min-h-screen bg-background">
       <SiteHeader />
 
       <main>
-        {/* HERO */}
-        <section id="home" ref={n => {
-        heroRef.current = n;
-      }} className="relative isolate overflow-hidden" aria-label="الواجهة الرئيسية">
-          <div className="relative min-h-[96vh]">
-            <HeroSlideshow images={heroImages} intervalMs={5000} className="fade-mask" />
+        {/* HERO (rebuilt) */}
+        <HeroSection images={heroImages} logoSrc={logo} />
 
-            <div className="relative z-10">
-              <div className="container pt-20 md:pt-28">
-                <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-                  <Reveal className="max-w-2xl">
-                    <HeroBrandMark className="mb-5" logoSrc={logo} />
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Badge className="rounded-full" variant="secondary">
-                        خدمة موجهة للمغاربة المقيمين بإيطاليا
-                      </Badge>
-                      <Badge className="rounded-full" variant="outline">
-                        ترتيب • ترجمة محلفة • أبوستيل • إرسال
-                      </Badge>
-                    </div>
-
-                    <h1 className="headline-premium mt-5 text-4xl font-semibold tracking-tight md:text-6xl text-red-600">
-                      إعداد ملفات الجنسية الإيطالية
-                      <span className="block text-primary">بأسلوب راقٍ… وبلا صداع راس.</span>
-                    </h1>
-
-                    <p className="mt-5 text-lg leading-relaxed md:text-xl text-secondary-foreground">
-                      <span className="font-semibold text-foreground">Citta‑Trad</span> كنواكبك من المغرب حتى إيطاليا:
-                      جمع الوثائق، تصحيح المعطيات، الأبوستيل، الترجمة المحلّفة، وترتيب الملف… ثم الإرسال الآمن.
-                    </p>
-
-                    <div className="mt-6 text-lg md:text-xl">
-                      <span className="text-secondary-foreground font-semibold">جمل دارجة ترحيبية: </span>
-                      <TypedWords words={["حنا هنا غير تهنى 😉", "غير ب كليك كلشي بين يديك ⚡", "شبيك لبيك، الخدمة بين يديك ✨"]} className="font-semibold text-foreground" />
-                    </div>
-
-                    <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                      <Button asChild variant="hero" size="pill" className="gap-2">
-                        <a href="#contact" aria-label="تواصل معنا الآن">
-                          <Sparkles className="h-4 w-4" />
-                          تواصل معنا دابا
-                        </a>
-                      </Button>
-
-                      <Button asChild variant="premium" size="pill" className="gap-2 surface-glass">
-                        <a href="#service" aria-label="تفاصيل الخدمة">
-                          شنو كنقدمّو؟
-                          <span aria-hidden className="text-brand-gold">
-                            •
-                          </span>
-                          الخدمة كاملة
-                        </a>
-                      </Button>
-                    </div>
-
-                    <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                      {[{
-                      title: "تنظيم احترافي",
-                      desc: "ترتيب الملف خطوة بخطوة"
-                    }, {
-                      title: "ترجمة محلفة",
-                      desc: "خالية من الأخطاء"
-                    }, {
-                      title: "إرسال آمن",
-                      desc: "بالبريد السريع"
-                    }].map(f => <Card key={f.title} className="surface-glass p-4 text-primary text-center bg-primary-foreground">
-                          <div className="text-sm font-semibold">{f.title}</div>
-                          <div className="mt-1 text-sm text-muted-foreground">{f.desc}</div>
-                        </Card>)}
-                    </div>
-                  </Reveal>
-
-                  <Reveal className="lg:justify-self-end">
-                    <Card className="surface-glass p-6">
-                      <div className="flex items-center gap-2">
-                        <ShieldCheck className="h-5 w-5 text-primary" />
-                        <div className="text-sm font-semibold">وعد Citta‑Trad</div>
-                      </div>
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                        الخدمة ديالك بلا ما تحرك من دارك: كنراجعو الوثائق، كنصلحو المعطيات، كنجهزو الملف بحال اللي غادي
-                        يتقدم لجهة رسمية… ومن بعد كنرسلوه بأمان.
-                      </p>
-                      <Separator className="my-4" />
-                      <ul className="space-y-3 text-sm">
-                        {["حنا معاك خطوة بخطوة", "غير تهنى، كلشي عندنا", "الوقت ديالك محفوظ، الخدمة بلا صداع"].map(t => <li key={t} className="flex items-start gap-2">
-                            <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
-                            <span>{t}</span>
-                          </li>)}
-                      </ul>
-                    </Card>
-                  </Reveal>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* PROMISE (under hero) */}
+        <PromiseBand />
 
         {/* ABOUT */}
         <SectionShell id="about" eyebrow="ℹ️ من نحن" title="نحن فريق مختص في الاستشارة القانونية للحصول على الجنسية الإيطالية">
@@ -188,27 +76,6 @@ const Index = () => {
             alt: "ملف جنسية إيطالية مرتب بختم ذهبي"
           }]} />
           </Reveal>
-        </SectionShell>
-
-        {/* KEY MOMENTS (Media + SEO) */}
-        <SectionShell eyebrow="✨ لحظات الخدمة" title="تفاصيل كتفرق: وثائقك كتمشي بحال ملف رسمي مُحكَم" className="relative">
-          <div className="grid gap-6">
-            <Reveal>
-              <MediaCard imageSrc={docImg} imageAlt="تنظيم الوثائق على مكتب رخامي بلمسة إيطالية" title="جمع الوثائق وتصحيح المعطيات" description="كنجمعو الوثائق المطلوبة، وكنراجعو الأسماء والتواريخ بدقة باش يتفادى الملف أي تعارض. هاد المرحلة هي اللي كتختصر عليك وقت بزاف فإيطاليا." />
-            </Reveal>
-
-            <Reveal>
-              <MediaCard align="right" imageSrc={apostilleImg} imageAlt="أبوستيل وختم رسمي فوق وثائق" title="الأبوستيل (Apostille) بلا تعقيدات" description="كنواكبو المصادقة حيث لازمة: عند العمالة، ومن بعد على الترجمة فالمحكمة الابتدائية—باش الوثائق تكون مقبولة بالطريقة الصحيحة." />
-            </Reveal>
-
-            <Reveal>
-              <MediaCard imageSrc={translationImg} imageAlt="مكتب ترجمة محلفة مع وثائق وختم" title="ترجمة محلفة + مراجعة صارمة" description="ترجمة محلفة خالية من الأخطاء مع مراجعة قبل المصادقة—حيت أي خطأ صغير يقدر يردّ الملف للور." />
-            </Reveal>
-
-            <Reveal>
-              <MediaCard align="right" imageSrc={courierImg} imageAlt="طرد بريد سريع مع لمسة إيطالية" title="إرسال سريع وآمن" description="كنرتبو الملف من جديد وكنسيفطوه للزبون عبر البريد السريع، باش توصل الوثائق فحالة ممتازة وبلا توتر." />
-            </Reveal>
-          </div>
         </SectionShell>
 
         {/* SERVICE */}
