@@ -20,7 +20,6 @@ import { MediaCard } from "@/components/citta/MediaCard";
 import { Reveal } from "@/components/citta/Reveal";
 import { SectionShell } from "@/components/citta/SectionShell";
 import { SiteHeader } from "@/components/citta/SiteHeader";
-import { TypedWords } from "@/components/citta/TypedWords";
 import { WhatsappFloat } from "@/components/citta/WhatsappFloat";
 
 const WHATSAPP_PHONE = "+212725989892";
@@ -28,11 +27,6 @@ const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفا
 
 const Index = () => {
   const heroRef = React.useRef<HTMLElement | null>(null);
-
-  const typedWords = React.useMemo(
-    () => ["حنا هنا غير تهنى 😉", "غير ب كليك كلشي بين يديك ⚡", "شبيك لبيك، الخدمة بين يديك ✨"],
-    [],
-  );
 
   const jsonLd = React.useMemo(() => {
     const url = typeof window !== "undefined" ? window.location.origin : "";
@@ -141,11 +135,8 @@ const Index = () => {
                     </p>
 
                     <div className="mt-6 text-lg md:text-xl">
-                      <span className="text-muted-foreground">جمل دارجة ترحيبية: </span>
-                      <TypedWords
-                        words={typedWords}
-                        className="font-semibold text-foreground"
-                      />
+                      <span className="text-muted-foreground">كلمة ترحيبية: </span>
+                      <span className="font-semibold text-foreground">حنا هنا غير تهنى 😉</span>
                     </div>
 
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
