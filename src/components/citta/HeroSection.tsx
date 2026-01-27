@@ -72,7 +72,7 @@ export function HeroSection({
 
         <div className="relative z-10">
           <div className="container pt-20 md:pt-28">
-            <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="mx-auto grid max-w-5xl items-center gap-10">
               <motion.div initial={reduced ? undefined : {
               opacity: 0,
               y: 24,
@@ -84,15 +84,15 @@ export function HeroSection({
             }} transition={reduced ? undefined : {
               duration: 0.9,
               ease: [0.2, 0.8, 0.2, 1]
-            }} className="max-w-2xl">
+             }} className="mx-auto max-w-3xl text-center">
                 {/* Brand */}
-                <div className="mb-6">
+                <div className="mb-6 flex justify-center">
                   <HeroBrandMark logoSrc={logoSrc} tagline="" logoClassName="h-16 sm:h-20 md:h-24" nameClassName="text-lg sm:text-xl md:text-2xl" className="px-5 py-4"
                 // make it clearly bigger inside hero
                 />
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-wrap items-center justify-center gap-2">
                   <Badge className="rounded-full" variant="secondary">
                     خدمة شاملة للمغاربة المقيمين بإيطاليا
                   </Badge>
@@ -109,7 +109,7 @@ export function HeroSection({
                   خدمة شاملة للمغاربة المقيمين بإيطاليا
                 </p>
 
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
                   <Button asChild variant="hero" size="pill" className="gap-2">
                     <a href="#contact" aria-label="تواصل معنا الآن">
                       
@@ -139,7 +139,7 @@ export function HeroSection({
                 }, {
                   title: "إرسال آمن",
                   desc: "بالبريد السريع"
-                }].map((f, idx) => <motion.div key={f.title} initial={reduced ? undefined : {
+                }].map((f, idx) => <motion.div key={f.title} className="h-full" initial={reduced ? undefined : {
                   opacity: 0,
                   y: 14,
                   scale: 0.98
@@ -157,7 +157,7 @@ export function HeroSection({
                   delay: 0.15 + idx * 0.08,
                   ease: [0.2, 0.8, 0.2, 1]
                 }}>
-                      <Card className="surface-glass group relative overflow-hidden p-4 transition-[transform,box-shadow] duration-300 hover:shadow-elegant">
+                      <Card className="surface-glass group relative h-full overflow-hidden p-4 text-right transition-[transform,box-shadow] duration-300 hover:shadow-elegant sm:text-center">
                         {/* premium gradient border illusion */}
                         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-80" style={{
                       background: "linear-gradient(135deg, hsl(var(--primary) / 0.16), transparent 40%), linear-gradient(315deg, hsl(var(--accent) / 0.14), transparent 45%)"
@@ -169,13 +169,13 @@ export function HeroSection({
                     }} />
 
                         <div className="relative">
-                          <div className="flex items-start justify-between gap-3">
+                          <div className="flex items-start justify-between gap-3 sm:flex-col sm:items-center sm:justify-center sm:gap-2">
                             <div>
                               <div className="text-sm font-semibold text-foreground">{f.title}</div>
                               <div className="mt-1 text-sm text-muted-foreground">{f.desc}</div>
                             </div>
 
-                            <div className="shrink-0">
+                            <div className="shrink-0 sm:order-first">
                               <div className="inline-flex items-center gap-2 rounded-full border bg-card/60 px-2.5 py-1 text-[11px] font-semibold text-muted-foreground">
                                 <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{
                               background: "hsl(var(--primary))"
@@ -197,7 +197,7 @@ export function HeroSection({
               </motion.div>
 
               {/* Right side: elegant “promise” preview card (kept compact) */}
-              <motion.div className="lg:justify-self-end" initial={reduced ? undefined : {
+              <motion.div className="mx-auto w-full max-w-xl" initial={reduced ? undefined : {
               opacity: 0,
               y: 26,
               scale: 0.98,
@@ -212,7 +212,7 @@ export function HeroSection({
               delay: 0.1,
               ease: [0.2, 0.8, 0.2, 1]
             }}>
-                <Card className="surface-glass p-6">
+                <Card className="surface-glass p-6 text-center">
                   <div className="text-sm font-semibold">وعد Citta‑Trad</div>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                     الخدمة ديالك بلا ما تحرك من دارك: كنراجعو الوثائق، كنصلحو المعطيات، كنجهزو الملف بحال اللي غادي يتقدم
