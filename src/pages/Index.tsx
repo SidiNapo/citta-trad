@@ -19,7 +19,6 @@ import aboutPrecisionImg from "@/assets/about-precision.jpg";
 import aboutDocsImg from "@/assets/about-documents.jpg";
 import { AboutShowcase } from "@/components/citta/AboutShowcase";
 import { HeroSlideshow } from "@/components/citta/HeroSlideshow";
-import { HeroBrandMark } from "@/components/citta/HeroBrandMark";
 import { MediaCard } from "@/components/citta/MediaCard";
 import { Reveal } from "@/components/citta/Reveal";
 import { ScrollArrows } from "@/components/citta/ScrollArrows";
@@ -73,9 +72,6 @@ const Index = () => {
       }} className="relative isolate overflow-hidden" aria-label="الواجهة الرئيسية">
           <div className="relative min-h-[96vh]">
             <HeroSlideshow images={heroImages} intervalMs={5000} className="fade-mask" />
-
-            {/* Center brand signature (logo + name) */}
-            <HeroBrandMark className="opacity-40 sm:opacity-45 lg:opacity-55" />
 
             <div className="relative z-10">
               <div className="container pt-20 md:pt-28">
