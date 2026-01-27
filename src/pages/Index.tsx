@@ -18,7 +18,6 @@ import { AboutShowcase } from "@/components/citta/AboutShowcase";
 import { HeroVideo } from "@/components/citta/HeroVideo";
 import { MediaCard } from "@/components/citta/MediaCard";
 import { Reveal } from "@/components/citta/Reveal";
-import { ScrollArrows } from "@/components/citta/ScrollArrows";
 import { SectionShell } from "@/components/citta/SectionShell";
 import { SiteHeader } from "@/components/citta/SiteHeader";
 import { TypedWords } from "@/components/citta/TypedWords";
@@ -115,7 +114,7 @@ const Index = () => {
             <HeroVideo src={heroVideo} className="fade-mask" />
 
             <div className="relative z-10">
-              <div className="container pt-20 md:pt-28">
+              <div className="container pt-14 sm:pt-16 md:pt-24">
                 <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
                   <Reveal className="max-w-2xl">
                     <div className="flex flex-wrap items-center gap-2">
@@ -128,8 +127,12 @@ const Index = () => {
                     </div>
 
                     <h1 className="headline-premium mt-5 text-4xl font-semibold tracking-tight md:text-6xl">
-                      إعداد ملفات الجنسية الإيطالية
-                      <span className="block text-muted-foreground">بأسلوب راقٍ… وبلا صداع راس.</span>
+                      <span className="block bg-gradient-to-l from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent [text-shadow:0_1px_0_hsl(var(--background))]">
+                        إعداد ملفات الجنسية الإيطالية
+                      </span>
+                      <span className="block text-muted-foreground [text-shadow:0_10px_40px_hsl(var(--primary)/0.18)]">
+                        بأسلوب راقٍ… وبلا صداع راس.
+                      </span>
                     </h1>
 
                     <p className="mt-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
@@ -410,7 +413,6 @@ const Index = () => {
 
       {/* Floating UX */}
       <WhatsappFloat phoneE164={WHATSAPP_PHONE} message={WHATSAPP_MESSAGE} />
-      <ScrollArrows />
     </div>
   );
 };
