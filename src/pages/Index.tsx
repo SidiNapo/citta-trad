@@ -144,10 +144,8 @@ const Index = () => {
           <div className="grid gap-6 lg:grid-cols-2">
             <Reveal>
               <Card className="p-6 shadow-elegant">
-              <h3 className="text-lg font-semibold">زر واتساب كبير وواضح</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                منين كتضغط، كيتحل واتساب مباشرة برسالة جاهزة. (الرقم ما كنكتبوهش فواجهة الصفحة للزوار).
-              </p>
+              
+              
               <div className="mt-5">
                 <Button asChild variant="hero" size="pill" className="w-full justify-center gap-2 md:w-auto">
                   <a href={`https://wa.me/${WHATSAPP_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`} target="_blank" rel="noreferrer" aria-label="فتح واتساب للتواصل">
