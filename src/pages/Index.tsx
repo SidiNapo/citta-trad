@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { CheckCircle2, Send, ShieldCheck, Sparkles } from "lucide-react";
-
 import heroVideo from "@/assets/hero-italy-premium.mp4";
 import docImg from "@/assets/section-documents.jpg";
 import apostilleImg from "@/assets/section-apostille.jpg";
@@ -13,102 +12,45 @@ import courierImg from "@/assets/section-courier.jpg";
 import aboutOfficeImg from "@/assets/about-office.jpg";
 import aboutPrecisionImg from "@/assets/about-precision.jpg";
 import aboutDocsImg from "@/assets/about-documents.jpg";
-
 import { AboutShowcase } from "@/components/citta/AboutShowcase";
 import { HeroVideo } from "@/components/citta/HeroVideo";
 import { MediaCard } from "@/components/citta/MediaCard";
 import { Reveal } from "@/components/citta/Reveal";
+import { ScrollArrows } from "@/components/citta/ScrollArrows";
 import { SectionShell } from "@/components/citta/SectionShell";
 import { SiteHeader } from "@/components/citta/SiteHeader";
+import { TypedWords } from "@/components/citta/TypedWords";
 import { WhatsappFloat } from "@/components/citta/WhatsappFloat";
-
 const WHATSAPP_PHONE = "+212725989892";
 const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفادة من خدمة إعداد ملفات الجنسية الإيطالية.";
-
 const Index = () => {
   const heroRef = React.useRef<HTMLElement | null>(null);
-
-  const jsonLd = React.useMemo(() => {
-    const url = typeof window !== "undefined" ? window.location.origin : "";
-    return {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          name: "Citta‑Trad",
-          url,
-          description:
-            "خدمة إعداد ملفات الجنسية الإيطالية للمغاربة المقيمين بإيطاليا: جمع الوثائق، الترجمة المحلّفة، الأبوستيل، ترتيب الملف والإرسال الآمن.",
-        },
-        {
-          "@type": "Service",
-          name: "إعداد ملفات الجنسية الإيطالية",
-          provider: { "@type": "Organization", name: "Citta‑Trad" },
-          areaServed: [
-            { "@type": "Country", name: "Italy" },
-            { "@type": "Country", name: "Morocco" },
-          ],
-          audience: { "@type": "Audience", audienceType: "Moroccans in Italy" },
-          description:
-            "مساعدة إدارية شاملة: جمع الوثائق، تدقيق المعطيات، ترجمة محلفة، أبوستيل، ترتيب الملف وإرساله بسرعة وأمان.",
-        },
-      ],
-    };
-  }, []);
-
   React.useEffect(() => {
     const el = heroRef.current;
     if (!el) return;
-
-    // Avoid jitter on touch devices; throttle via rAF on fine pointers only.
-    const fine = window.matchMedia?.("(pointer: fine)")?.matches ?? false;
-    if (!fine) return;
-
-    let raf = 0;
-    let lastEvent: PointerEvent | null = null;
-    const tick = () => {
-      raf = 0;
-      if (!lastEvent) return;
-      const e = lastEvent;
+    const onMove = (e: PointerEvent) => {
       const r = el.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width) * 100;
-      const y = ((e.clientY - r.top) / r.height) * 100;
+      const x = (e.clientX - r.left) / r.width * 100;
+      const y = (e.clientY - r.top) / r.height * 100;
       el.style.setProperty("--mx", `${x.toFixed(2)}%`);
       el.style.setProperty("--my", `${y.toFixed(2)}%`);
     };
-    const onMove = (e: PointerEvent) => {
-      lastEvent = e;
-      if (!raf) raf = window.requestAnimationFrame(tick);
-    };
-    el.addEventListener("pointermove", onMove, { passive: true });
-    return () => {
-      el.removeEventListener("pointermove", onMove);
-      if (raf) window.cancelAnimationFrame(raf);
-    };
+    el.addEventListener("pointermove", onMove);
+    return () => el.removeEventListener("pointermove", onMove);
   }, []);
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <SiteHeader />
 
       <main>
-        {/* SEO: structured data */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-
         {/* HERO */}
-        <section
-          id="home"
-          ref={(n) => {
-            heroRef.current = n;
-          }}
-          className="relative overflow-hidden"
-          aria-label="الواجهة الرئيسية"
-        >
-          <div className="relative min-h-[92svh] md:min-h-[96vh]">
+        <section id="home" ref={n => {
+        heroRef.current = n;
+      }} className="relative overflow-hidden" aria-label="الواجهة الرئيسية">
+          <div className="relative min-h-[96vh]">
             <HeroVideo src={heroVideo} className="fade-mask" />
 
             <div className="relative z-10">
-              <div className="container pt-14 sm:pt-16 md:pt-24">
+              <div className="container pt-20 md:pt-28">
                 <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
                   <Reveal className="max-w-2xl">
                     <div className="flex flex-wrap items-center gap-2">
@@ -121,12 +63,8 @@ const Index = () => {
                     </div>
 
                     <h1 className="headline-premium mt-5 text-4xl font-semibold tracking-tight md:text-6xl">
-                      <span className="block bg-gradient-to-l from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent [text-shadow:0_1px_0_hsl(var(--background))]">
-                        إعداد ملفات الجنسية الإيطالية
-                      </span>
-                      <span className="block text-muted-foreground [text-shadow:0_10px_40px_hsl(var(--primary)/0.18)]">
-                        بأسلوب راقٍ… وبلا صداع راس.
-                      </span>
+                      إعداد ملفات الجنسية الإيطالية
+                      <span className="block text-muted-foreground">بأسلوب راقٍ… وبلا صداع راس.</span>
                     </h1>
 
                     <p className="mt-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
@@ -135,8 +73,8 @@ const Index = () => {
                     </p>
 
                     <div className="mt-6 text-lg md:text-xl">
-                      <span className="text-muted-foreground">كلمة ترحيبية: </span>
-                      <span className="font-semibold text-foreground">حنا هنا غير تهنى 😉</span>
+                      <span className="text-muted-foreground">جمل دارجة ترحيبية: </span>
+                      <TypedWords words={["حنا هنا غير تهنى 😉", "غير ب كليك كلشي بين يديك ⚡", "شبيك لبيك، الخدمة بين يديك ✨"]} className="font-semibold text-foreground" />
                     </div>
 
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -159,16 +97,19 @@ const Index = () => {
                     </div>
 
                     <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                      {[
-                        { title: "تنظيم احترافي", desc: "ترتيب الملف خطوة بخطوة" },
-                        { title: "ترجمة محلفة", desc: "خالية من الأخطاء" },
-                        { title: "إرسال آمن", desc: "بالبريد السريع" },
-                      ].map((f) => (
-                        <Card key={f.title} className="surface-glass p-4">
+                      {[{
+                      title: "تنظيم احترافي",
+                      desc: "ترتيب الملف خطوة بخطوة"
+                    }, {
+                      title: "ترجمة محلفة",
+                      desc: "خالية من الأخطاء"
+                    }, {
+                      title: "إرسال آمن",
+                      desc: "بالبريد السريع"
+                    }].map(f => <Card key={f.title} className="surface-glass p-4 text-primary text-center bg-primary-foreground">
                           <div className="text-sm font-semibold">{f.title}</div>
                           <div className="mt-1 text-sm text-muted-foreground">{f.desc}</div>
-                        </Card>
-                      ))}
+                        </Card>)}
                     </div>
                   </Reveal>
 
@@ -184,12 +125,10 @@ const Index = () => {
                       </p>
                       <Separator className="my-4" />
                       <ul className="space-y-3 text-sm">
-                        {["حنا معاك خطوة بخطوة", "غير تهنى، كلشي عندنا", "الوقت ديالك محفوظ، الخدمة بلا صداع"].map((t) => (
-                          <li key={t} className="flex items-start gap-2">
+                        {["حنا معاك خطوة بخطوة", "غير تهنى، كلشي عندنا", "الوقت ديالك محفوظ، الخدمة بلا صداع"].map(t => <li key={t} className="flex items-start gap-2">
                             <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
                             <span>{t}</span>
-                          </li>
-                        ))}
+                          </li>)}
                       </ul>
                     </Card>
                   </Reveal>
@@ -200,78 +139,47 @@ const Index = () => {
         </section>
 
         {/* ABOUT */}
-        <SectionShell
-          id="about"
-          eyebrow="ℹ️ من نحن"
-          title="حنا فريق مختص… وخدمتنا منظمة بحال ساعة سويسرية"
-        >
+        <SectionShell id="about" eyebrow="ℹ️ من نحن" title="حنا فريق مختص… وخدمتنا منظمة بحال ساعة سويسرية">
           <Reveal>
-            <AboutShowcase
-              title="علاش Citta‑Trad؟"
-              description="حنا فريق مختص فالمساعدة الإدارية والاستشارة، كنواكب المغاربة المقيمين بإيطاليا فإعداد ملفات الجنسية الإيطالية: جمع الوثائق، ترتيبها، ترجمتها ترجمة محلفة، والمصادقة عليها، مع إرسالها مباشرة إلى إيطاليا بكل أمان واحترافية. لأن إعداد ملف الجنسية الإيطالية كيحتاج دقة فالأسماء، التواريخ، وترتيب الوثائق. أي خطأ بسيط يقدر يضيع الوقت ديالك."
-              bullets={[
-                "حنا معاك خطوة بخطوة",
-                "غير تهنى، كلشي عندنا",
-                "الخدمة ديالك بلا صداع راس",
-                "تنسيق واضح ومواعيد محترمة",
-              ]}
-              steps={[
-                { t: "تدقيق المعطيات", d: "كنطابقو المعلومات الشخصية مع الوثائق" },
-                { t: "مرافقة احترافية", d: "تواصل واضح وشفاف" },
-                { t: "نتيجة مرتبة", d: "ملف جاهز باش يمشي للمرحلة الموالية" },
-              ]}
-              images={[
-                { src: aboutOfficeImg, alt: "مكتب إيطالي راقي مع وثائق رسمية" },
-                { src: aboutPrecisionImg, alt: "ساعة سويسرية تمثل الدقة والتنظيم" },
-                { src: aboutDocsImg, alt: "ملف جنسية إيطالية مرتب بختم ذهبي" },
-              ]}
-            />
+            <AboutShowcase title="علاش Citta‑Trad؟" description="حنا فريق مختص فالمساعدة الإدارية والاستشارة، كنواكب المغاربة المقيمين بإيطاليا فإعداد ملفات الجنسية الإيطالية: جمع الوثائق، ترتيبها، ترجمتها ترجمة محلفة، والمصادقة عليها، مع إرسالها مباشرة إلى إيطاليا بكل أمان واحترافية. لأن إعداد ملف الجنسية الإيطالية كيحتاج دقة فالأسماء، التواريخ، وترتيب الوثائق. أي خطأ بسيط يقدر يضيع الوقت ديالك." bullets={["حنا معاك خطوة بخطوة", "غير تهنى، كلشي عندنا", "الخدمة ديالك بلا صداع راس", "تنسيق واضح ومواعيد محترمة"]} steps={[{
+            t: "تدقيق المعطيات",
+            d: "كنطابقو المعلومات الشخصية مع الوثائق"
+          }, {
+            t: "مرافقة احترافية",
+            d: "تواصل واضح وشفاف"
+          }, {
+            t: "نتيجة مرتبة",
+            d: "ملف جاهز باش يمشي للمرحلة الموالية"
+          }]} images={[{
+            src: aboutOfficeImg,
+            alt: "مكتب إيطالي راقي مع وثائق رسمية"
+          }, {
+            src: aboutPrecisionImg,
+            alt: "ساعة سويسرية تمثل الدقة والتنظيم"
+          }, {
+            src: aboutDocsImg,
+            alt: "ملف جنسية إيطالية مرتب بختم ذهبي"
+          }]} />
           </Reveal>
         </SectionShell>
 
         {/* KEY MOMENTS (Media + SEO) */}
-        <SectionShell
-          eyebrow="✨ لحظات الخدمة"
-          title="تفاصيل كتفرق: وثائقك كتمشي بحال ملف رسمي مُحكَم"
-          className="relative"
-        >
+        <SectionShell eyebrow="✨ لحظات الخدمة" title="تفاصيل كتفرق: وثائقك كتمشي بحال ملف رسمي مُحكَم" className="relative">
           <div className="grid gap-6">
             <Reveal>
-              <MediaCard
-                imageSrc={docImg}
-                imageAlt="تنظيم الوثائق على مكتب رخامي بلمسة إيطالية"
-                title="جمع الوثائق وتصحيح المعطيات"
-                description="كنجمعو الوثائق المطلوبة، وكنراجعو الأسماء والتواريخ بدقة باش يتفادى الملف أي تعارض. هاد المرحلة هي اللي كتختصر عليك وقت بزاف فإيطاليا."
-              />
+              <MediaCard imageSrc={docImg} imageAlt="تنظيم الوثائق على مكتب رخامي بلمسة إيطالية" title="جمع الوثائق وتصحيح المعطيات" description="كنجمعو الوثائق المطلوبة، وكنراجعو الأسماء والتواريخ بدقة باش يتفادى الملف أي تعارض. هاد المرحلة هي اللي كتختصر عليك وقت بزاف فإيطاليا." />
             </Reveal>
 
             <Reveal>
-              <MediaCard
-                align="right"
-                imageSrc={apostilleImg}
-                imageAlt="أبوستيل وختم رسمي فوق وثائق"
-                title="الأبوستيل (Apostille) بلا تعقيدات"
-                description="كنواكبو المصادقة حيث لازمة: عند العمالة، ومن بعد على الترجمة فالمحكمة الابتدائية—باش الوثائق تكون مقبولة بالطريقة الصحيحة."
-              />
+              <MediaCard align="right" imageSrc={apostilleImg} imageAlt="أبوستيل وختم رسمي فوق وثائق" title="الأبوستيل (Apostille) بلا تعقيدات" description="كنواكبو المصادقة حيث لازمة: عند العمالة، ومن بعد على الترجمة فالمحكمة الابتدائية—باش الوثائق تكون مقبولة بالطريقة الصحيحة." />
             </Reveal>
 
             <Reveal>
-              <MediaCard
-                imageSrc={translationImg}
-                imageAlt="مكتب ترجمة محلفة مع وثائق وختم"
-                title="ترجمة محلفة + مراجعة صارمة"
-                description="ترجمة محلفة خالية من الأخطاء مع مراجعة قبل المصادقة—حيت أي خطأ صغير يقدر يردّ الملف للور."
-              />
+              <MediaCard imageSrc={translationImg} imageAlt="مكتب ترجمة محلفة مع وثائق وختم" title="ترجمة محلفة + مراجعة صارمة" description="ترجمة محلفة خالية من الأخطاء مع مراجعة قبل المصادقة—حيت أي خطأ صغير يقدر يردّ الملف للور." />
             </Reveal>
 
             <Reveal>
-              <MediaCard
-                align="right"
-                imageSrc={courierImg}
-                imageAlt="طرد بريد سريع مع لمسة إيطالية"
-                title="إرسال سريع وآمن"
-                description="كنرتبو الملف من جديد وكنسيفطوه للزبون عبر البريد السريع، باش توصل الوثائق فحالة ممتازة وبلا توتر."
-              />
+              <MediaCard align="right" imageSrc={courierImg} imageAlt="طرد بريد سريع مع لمسة إيطالية" title="إرسال سريع وآمن" description="كنرتبو الملف من جديد وكنسيفطوه للزبون عبر البريد السريع، باش توصل الوثائق فحالة ممتازة وبلا توتر." />
             </Reveal>
           </div>
         </SectionShell>
@@ -283,32 +191,17 @@ const Index = () => {
               <Card className="p-6 shadow-elegant">
               <h3 className="text-lg font-semibold">🔹 تشمل الخدمة:</h3>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                {[
-                  "جمع الوثائق المطلوبة",
-                  "تصحيحها وملاءمتها للمعلومات الشخصية",
-                  "المصادقة عليها بشهادة الأبوستيل لدى العمالة",
-                  "ترتيب الملف",
-                  "ترجمة الوثائق ترجمة محلفة خالية من الأخطاء",
-                  "المصادقة على الترجمة بشهادة الأبوستيل بالمحكمة الابتدائية",
-                  "إعادة ترتيب الملف",
-                  "إرسال الوثائق مباشرة للزبون عبر البريد السريع",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2">
+                {["جمع الوثائق المطلوبة", "تصحيحها وملاءمتها للمعلومات الشخصية", "المصادقة عليها بشهادة الأبوستيل لدى العمالة", "ترتيب الملف", "ترجمة الوثائق ترجمة محلفة خالية من الأخطاء", "المصادقة على الترجمة بشهادة الأبوستيل بالمحكمة الابتدائية", "إعادة ترتيب الملف", "إرسال الوثائق مباشرة للزبون عبر البريد السريع"].map(item => <li key={item} className="flex items-start gap-2">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
                     <span className="text-sm leading-relaxed">{item}</span>
-                  </li>
-                ))}
+                  </li>)}
               </ul>
 
               <Separator className="my-6" />
               <div className="grid gap-3 sm:grid-cols-3">
-                {["الخدمة ديالك بلا ما تحرك من دارك", "كلشي بين يديك غير بكليك واحد", "الوقت ديالك محفوظ، الخدمة بلا صداع"].map(
-                  (t) => (
-                    <div key={t} className="rounded-xl border bg-card p-4">
+                {["الخدمة ديالك بلا ما تحرك من دارك", "كلشي بين يديك غير بكليك واحد", "الوقت ديالك محفوظ، الخدمة بلا صداع"].map(t => <div key={t} className="rounded-xl border bg-card p-4">
                       <div className="text-sm font-semibold">{t}</div>
-                    </div>
-                  ),
-                )}
+                    </div>)}
               </div>
               </Card>
             </Reveal>
@@ -317,14 +210,22 @@ const Index = () => {
               <Card className="surface-glass p-6">
               <h3 className="text-lg font-semibold">كيفاش كنخدمو؟ (روتين واضح)</h3>
               <ol className="mt-4 space-y-3">
-                {[
-                  { t: "التشخيص", d: "كنحددو شنو ناقص وشنو خاص يتصلّح" },
-                  { t: "التجهيز", d: "ملاءمة الوثائق + ترتيب منطقي" },
-                  { t: "التوثيق", d: "الأبوستيل حيث لازم" },
-                  { t: "الترجمة", d: "ترجمة محلفة + مراجعة" },
-                  { t: "التسليم", d: "إرسال سريع وآمن" },
-                ].map((s, idx) => (
-                  <li key={s.t} className="flex gap-3">
+                {[{
+                  t: "التشخيص",
+                  d: "كنحددو شنو ناقص وشنو خاص يتصلّح"
+                }, {
+                  t: "التجهيز",
+                  d: "ملاءمة الوثائق + ترتيب منطقي"
+                }, {
+                  t: "التوثيق",
+                  d: "الأبوستيل حيث لازم"
+                }, {
+                  t: "الترجمة",
+                  d: "ترجمة محلفة + مراجعة"
+                }, {
+                  t: "التسليم",
+                  d: "إرسال سريع وآمن"
+                }].map((s, idx) => <li key={s.t} className="flex gap-3">
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
                       {idx + 1}
                     </div>
@@ -332,8 +233,7 @@ const Index = () => {
                       <div className="text-sm font-semibold">{s.t}</div>
                       <div className="text-sm text-muted-foreground">{s.d}</div>
                     </div>
-                  </li>
-                ))}
+                  </li>)}
               </ol>
               <Separator className="my-5" />
               <p className="text-sm leading-relaxed text-muted-foreground">
@@ -355,18 +255,8 @@ const Index = () => {
                 منين كتضغط، كيتحل واتساب مباشرة برسالة جاهزة. (الرقم ما كنكتبوهش فواجهة الصفحة للزوار).
               </p>
               <div className="mt-5">
-                <Button
-                  asChild
-                  variant="hero"
-                  size="pill"
-                  className="w-full justify-center gap-2 md:w-auto"
-                >
-                  <a
-                    href={`https://wa.me/${WHATSAPP_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="فتح واتساب للتواصل"
-                  >
+                <Button asChild variant="hero" size="pill" className="w-full justify-center gap-2 md:w-auto">
+                  <a href={`https://wa.me/${WHATSAPP_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`} target="_blank" rel="noreferrer" aria-label="فتح واتساب للتواصل">
                     <Send className="h-4 w-4" />
                     فتح واتساب الآن
                   </a>
@@ -404,8 +294,7 @@ const Index = () => {
 
       {/* Floating UX */}
       <WhatsappFloat phoneE164={WHATSAPP_PHONE} message={WHATSAPP_MESSAGE} />
-    </div>
-  );
+      <ScrollArrows />
+    </div>;
 };
-
 export default Index;
