@@ -19,9 +19,9 @@ export function MobileNav({ items, className }: { items: MobileNavItem[]; classN
         <SheetTrigger asChild>
           <Button
             type="button"
-            variant="outline"
+            variant="default"
             size="icon"
-            className="rounded-full shadow-elegant"
+            className="h-9 w-9 shrink-0 rounded-full shadow-elegant"
             aria-label="فتح القائمة"
           >
             <Menu className="h-5 w-5" />

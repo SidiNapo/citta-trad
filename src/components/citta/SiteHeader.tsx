@@ -34,7 +34,7 @@ export function SiteHeader() {
           <img
             src={logo}
             alt="شعار Citta-Trad"
-            className="h-14 w-auto sm:h-12 md:h-11"
+            className="h-16 w-auto sm:h-12 md:h-11"
             loading="eager"
           />
           <div className="hidden sm:block">
@@ -55,7 +55,7 @@ export function SiteHeader() {
         </nav>
 
         {/* Right side actions (mobile menu button stays right) */}
-        <div className="flex items-center gap-2">
+        <div className="z-20 flex items-center gap-2">
           <MobileNav items={items} />
           <Button asChild variant="hero" size="pill" className="rounded-full shadow-elegant">
             <a href="#service" aria-label="اكتشف الخدمة">
