@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { FileText, Home, Info, Phone, Workflow } from "lucide-react";
 import logo from "@/assets/citta-trad-logo.png";
+import { MobileNav } from "@/components/citta/MobileNav";
 
 type NavItem = {
   href: string;
@@ -21,7 +22,12 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="container flex h-16 items-center justify-between gap-4">
         <a href="#home" className="flex items-center gap-3" aria-label="Citta-Trad">
-          <img src={logo} alt="شعار Citta-Trad" className="h-10 w-auto" loading="eager" />
+          <img
+            src={logo}
+            alt="شعار Citta-Trad"
+            className="h-12 w-auto sm:h-12 md:h-11"
+            loading="eager"
+          />
           <div className="hidden sm:block">
             <div className="text-sm font-semibold">Citta‑Trad</div>
             <div className="text-xs text-muted-foreground">خدمة إعداد ملفات الجنسية الإيطالية</div>
@@ -40,6 +46,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <MobileNav items={items} />
           <Button asChild variant="hero" size="pill" className="rounded-full shadow-elegant">
             <a href="#service" aria-label="اكتشف الخدمة">
               <FileText className="h-4 w-4" />
