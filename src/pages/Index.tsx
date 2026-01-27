@@ -10,7 +10,11 @@ import docImg from "@/assets/section-documents.jpg";
 import apostilleImg from "@/assets/section-apostille.jpg";
 import translationImg from "@/assets/section-translation.jpg";
 import courierImg from "@/assets/section-courier.jpg";
+import aboutOfficeImg from "@/assets/about-office.jpg";
+import aboutPrecisionImg from "@/assets/about-precision.jpg";
+import aboutDocsImg from "@/assets/about-documents.jpg";
 
+import { AboutShowcase } from "@/components/citta/AboutShowcase";
 import { HeroVideo } from "@/components/citta/HeroVideo";
 import { MediaCard } from "@/components/citta/MediaCard";
 import { Reveal } from "@/components/citta/Reveal";
@@ -153,51 +157,33 @@ const Index = () => {
         </section>
 
         {/* ABOUT */}
-        <SectionShell id="about" eyebrow="ℹ️ من نحن" title="حنا فريق مختص… وخدمتنا منظمة بحال ساعة سويسرية">
-          <div className="grid gap-6 lg:grid-cols-2">
-            <Reveal>
-              <Card className="p-6 shadow-elegant">
-              <p className="text-base leading-relaxed text-muted-foreground">
-                حنا فريق مختص فالمساعدة الإدارية والاستشارة، كنواكب المغاربة المقيمين بإيطاليا فإعداد ملفات الجنسية
-                الإيطالية: جمع الوثائق، ترتيبها، ترجمتها ترجمة محلفة، والمصادقة عليها، مع إرسالها مباشرة إلى إيطاليا بكل
-                أمان واحترافية.
-              </p>
-              <Separator className="my-5" />
-              <div className="grid gap-3 sm:grid-cols-2">
-                {["حنا معاك خطوة بخطوة", "غير تهنى، كلشي عندنا", "الخدمة ديالك بلا صداع راس", "تنسيق واضح ومواعيد محترمة"].map(
-                  (s) => (
-                    <div key={s} className="flex items-start gap-2">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
-                      <span className="text-sm">{s}</span>
-                    </div>
-                  ),
-                )}
-              </div>
-              </Card>
-            </Reveal>
-
-            <Reveal>
-              <Card className="surface-glass p-6">
-              <h3 className="text-lg font-semibold">علاش Citta‑Trad؟ (سيو + وضوح)</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                لأن إعداد ملف الجنسية الإيطالية كيحتاج دقة فالأسماء، التواريخ، وترتيب الوثائق. أي خطأ بسيط يقدر يضيع
-                الوقت ديالك. حنا كنشتغلو بمنهج واضح: تدقيق → ملاءمة → أبوستيل → ترجمة محلفة → إعادة ترتيب → إرسال.
-              </p>
-              <div className="mt-5 grid gap-3">
-                {[
-                  { t: "تدقيق المعطيات", d: "كنطابقو المعلومات الشخصية مع الوثائق" },
-                  { t: "مرافقة احترافية", d: "تواصل واضح وشفاف" },
-                  { t: "نتيجة مرتبة", d: "ملف جاهز باش يمشي للمرحلة الموالية" },
-                ].map((x) => (
-                  <div key={x.t} className="rounded-lg border bg-card/60 p-4">
-                    <div className="text-sm font-semibold">{x.t}</div>
-                    <div className="mt-1 text-sm text-muted-foreground">{x.d}</div>
-                  </div>
-                ))}
-              </div>
-              </Card>
-            </Reveal>
-          </div>
+        <SectionShell
+          id="about"
+          eyebrow="ℹ️ من نحن"
+          title="حنا فريق مختص… وخدمتنا منظمة بحال ساعة سويسرية"
+        >
+          <Reveal>
+            <AboutShowcase
+              title="علاش Citta‑Trad؟"
+              description="حنا فريق مختص فالمساعدة الإدارية والاستشارة، كنواكب المغاربة المقيمين بإيطاليا فإعداد ملفات الجنسية الإيطالية: جمع الوثائق، ترتيبها، ترجمتها ترجمة محلفة، والمصادقة عليها، مع إرسالها مباشرة إلى إيطاليا بكل أمان واحترافية. لأن إعداد ملف الجنسية الإيطالية كيحتاج دقة فالأسماء، التواريخ، وترتيب الوثائق. أي خطأ بسيط يقدر يضيع الوقت ديالك."
+              bullets={[
+                "حنا معاك خطوة بخطوة",
+                "غير تهنى، كلشي عندنا",
+                "الخدمة ديالك بلا صداع راس",
+                "تنسيق واضح ومواعيد محترمة",
+              ]}
+              steps={[
+                { t: "تدقيق المعطيات", d: "كنطابقو المعلومات الشخصية مع الوثائق" },
+                { t: "مرافقة احترافية", d: "تواصل واضح وشفاف" },
+                { t: "نتيجة مرتبة", d: "ملف جاهز باش يمشي للمرحلة الموالية" },
+              ]}
+              images={[
+                { src: aboutOfficeImg, alt: "مكتب إيطالي راقي مع وثائق رسمية" },
+                { src: aboutPrecisionImg, alt: "ساعة سويسرية تمثل الدقة والتنظيم" },
+                { src: aboutDocsImg, alt: "ملف جنسية إيطالية مرتب بختم ذهبي" },
+              ]}
+            />
+          </Reveal>
         </SectionShell>
 
         {/* KEY MOMENTS (Media + SEO) */}
