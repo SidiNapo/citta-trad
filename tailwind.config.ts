@@ -57,6 +57,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+
+        /* brand extras (still semantic) */
+        brand: {
+          gold: "hsl(var(--brand-gold))",
+          ink: "hsl(var(--brand-ink))",
+          paper: "hsl(var(--brand-paper))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,10 +87,25 @@ export default {
             height: "0",
           },
         },
+
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "100% 50%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        float: "float 4s ease-in-out infinite",
+        shimmer: "shimmer 10s ease-in-out infinite",
+      },
+      boxShadow: {
+        elegant: "var(--shadow-elegant)",
+        glow: "var(--shadow-glow)",
       },
     },
   },
