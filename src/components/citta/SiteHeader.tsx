@@ -20,8 +20,17 @@ const items: NavItem[] = [
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="container flex h-18 items-center justify-between gap-4 md:h-16">
-        <a href="#home" className="flex items-center gap-3" aria-label="Citta-Trad">
+      <div className="container relative flex h-18 items-center justify-end gap-4 md:h-16 md:justify-between">
+        {/* Mobile: logo centered. Desktop: logo on the start. */}
+        <a
+          href="#home"
+          className={cn(
+            "flex items-center gap-3",
+            "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
+            "md:static md:translate-x-0 md:translate-y-0",
+          )}
+          aria-label="Citta-Trad"
+        >
           <img
             src={logo}
             alt="شعار Citta-Trad"
@@ -45,6 +54,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
+        {/* Right side actions (mobile menu button stays right) */}
         <div className="flex items-center gap-2">
           <MobileNav items={items} />
           <Button asChild variant="hero" size="pill" className="rounded-full shadow-elegant">
