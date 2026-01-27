@@ -21,8 +21,8 @@
     --popover: 35 45% 99%;
     --popover-foreground: 222 28% 12%;
 
-    /* Italian green */
-    --primary: 150 52% 32%;
+    /* Italian green (shifted more tricolore-forward) */
+    --primary: 148 62% 34%;
     --primary-foreground: 36 33% 98%;
 
     --secondary: 35 28% 94%;
@@ -31,8 +31,8 @@
     --muted: 35 22% 93%;
     --muted-foreground: 222 10% 40%;
 
-    /* Italian red accent */
-    --accent: 352 62% 40%;
+    /* Italian red accent (shifted more vivid) */
+    --accent: 355 78% 46%;
     --accent-foreground: 36 33% 98%;
 
     --destructive: 0 80% 52%;
@@ -55,10 +55,15 @@
     --sidebar-ring: 150 52% 32%;
 
     /* Brand extras */
-    --brand-gold: 43 72% 55%;
+    --brand-gold: 43 66% 52%;
     --brand-ink: 222 28% 12%;
     --brand-paper: 35 36% 98%;
     --brand-shadow: 222 20% 10%;
+
+    /* Flag accents */
+    --flag-green: var(--primary);
+    --flag-white: var(--background);
+    --flag-red: var(--accent);
 
     --gradient-hero: radial-gradient(1200px circle at var(--mx, 60%) var(--my, 30%), hsl(var(--brand-gold) / 0.18), transparent 55%),
       linear-gradient(135deg, hsl(var(--primary) / 0.22), transparent 55%),
@@ -82,7 +87,7 @@
     --popover: 222 26% 10%;
     --popover-foreground: 36 33% 98%;
 
-    --primary: 150 52% 42%;
+    --primary: 148 62% 46%;
     --primary-foreground: 222 30% 8%;
 
     --secondary: 222 18% 14%;
@@ -91,7 +96,7 @@
     --muted: 222 18% 14%;
     --muted-foreground: 35 10% 72%;
 
-    --accent: 352 62% 48%;
+    --accent: 355 78% 54%;
     --accent-foreground: 36 33% 98%;
 
     --destructive: 0 70% 38%;
@@ -110,10 +115,14 @@
     --sidebar-border: 222 18% 18%;
     --sidebar-ring: 150 52% 42%;
 
-    --brand-gold: 43 72% 62%;
+    --brand-gold: 43 66% 58%;
     --brand-ink: 36 33% 98%;
     --brand-paper: 222 30% 8%;
     --brand-shadow: 0 0% 0%;
+
+    --flag-green: var(--primary);
+    --flag-white: var(--background);
+    --flag-red: var(--accent);
 
     --gradient-hero: radial-gradient(1100px circle at var(--mx, 60%) var(--my, 30%), hsl(var(--brand-gold) / 0.2), transparent 55%),
       linear-gradient(135deg, hsl(var(--primary) / 0.24), transparent 55%),
@@ -148,6 +157,19 @@
 @layer components {
   .bg-hero-field {
     background-image: var(--gradient-hero);
+  }
+
+  .bg-flag-field {
+    background-image:
+      linear-gradient(
+        90deg,
+        hsl(var(--flag-green) / 0.14),
+        hsl(var(--flag-white) / 0.02) 35%,
+        hsl(var(--flag-red) / 0.12)
+      ),
+      radial-gradient(900px circle at var(--mx, 40%) var(--my, 20%), hsl(var(--flag-green) / 0.14), transparent 55%),
+      radial-gradient(900px circle at var(--mx, 70%) var(--my, 55%), hsl(var(--flag-red) / 0.12), transparent 55%);
+    filter: saturate(1.05);
   }
 
   .surface-glass {

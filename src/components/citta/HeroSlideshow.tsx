@@ -48,6 +48,9 @@ export function HeroSlideshow({ images, intervalMs = 8000, className }: Props) {
       {/* vignette + readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/20 to-background/70" />
       <div className="absolute inset-0 bg-hero-field" />
+
+      {/* modern tricolore ambience (subtle, no literal flag image) */}
+      <div className="absolute inset-0 bg-flag-field opacity-55 mix-blend-multiply" />
     </div>
   );
 }
