@@ -21,27 +21,50 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="container h-18 md:h-16">
-        <div className="grid h-full grid-cols-[1fr_auto_1fr] items-center gap-3 md:flex md:justify-between">
-          {/* Mobile: left spacer for perfect centering */}
-          <div className="hidden md:block" />
+        {/* Mobile layout: CTA (left) • Logo (center) • Menu (right) */}
+        <div className="grid h-full grid-cols-[auto_1fr_auto] items-center gap-3 md:hidden">
+          <Button
+            asChild
+            variant="hero"
+            size="pill"
+            className="justify-self-start rounded-full shadow-elegant h-9 px-4 text-sm"
+          >
+            <a href="#service" aria-label="اكتشف الخدمة">
+              <FileText className="h-4 w-4" />
+              <span className="font-semibold">ابدأ دابا</span>
+            </a>
+          </Button>
 
-          {/* Logo: centered on mobile, start on desktop */}
-          <a href="#home" className="justify-self-center md:justify-self-auto" aria-label="Citta-Trad">
+          <a href="#home" className="justify-self-center" aria-label="Citta-Trad">
             <div className="flex items-center gap-3">
               <img
                 src={logo}
                 alt="شعار Citta-Trad"
-                className="h-16 w-auto sm:h-12 md:h-11"
+                className="h-16 w-auto"
                 loading="eager"
               />
-              <div className="hidden sm:block">
-                <div className="text-sm font-semibold">Citta‑Trad</div>
-                <div className="text-xs text-muted-foreground">خدمة إعداد ملفات الجنسية الإيطالية</div>
-              </div>
             </div>
           </a>
 
-          <nav className="hidden items-center gap-1 md:flex" aria-label="القائمة الرئيسية">
+          <MobileNav items={items} className="justify-self-end" />
+        </div>
+
+        {/* Desktop layout */}
+        <div className="hidden h-full items-center justify-between gap-4 md:flex">
+          <a href="#home" className="flex items-center gap-3" aria-label="Citta-Trad">
+            <img
+              src={logo}
+              alt="شعار Citta-Trad"
+              className="h-11 w-auto"
+              loading="eager"
+            />
+            <div>
+              <div className="text-sm font-semibold">Citta‑Trad</div>
+              <div className="text-xs text-muted-foreground">خدمة إعداد ملفات الجنسية الإيطالية</div>
+            </div>
+          </a>
+
+          <nav className="flex items-center gap-1" aria-label="القائمة الرئيسية">
             {items.map((it) => (
               <Button key={it.href} asChild variant="ghost" className="rounded-full">
                 <a href={it.href} className={cn("flex items-center gap-2")}>
@@ -52,15 +75,8 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          {/* Right side actions (mobile stays right, never overlaps logo) */}
-          <div className="flex items-center justify-self-end gap-2">
-            <MobileNav items={items} />
-            <Button
-              asChild
-              variant="hero"
-              size="pill"
-              className="rounded-full shadow-elegant h-9 px-4 text-sm md:h-11 md:px-6 md:text-base"
-            >
+          <div className="flex items-center gap-2">
+            <Button asChild variant="hero" size="pill" className="rounded-full shadow-elegant">
               <a href="#service" aria-label="اكتشف الخدمة">
                 <FileText className="h-4 w-4" />
                 <span className="font-semibold">ابدأ دابا</span>
