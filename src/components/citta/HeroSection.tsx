@@ -10,15 +10,19 @@ type HeroImage = {
   src: string;
   alt: string;
 };
+
+export type HeroFeatureKey = "organize" | "translate" | "ship";
 type Props = {
   images: HeroImage[];
   logoSrc: string;
   className?: string;
+  onFeatureSelect?: (key: HeroFeatureKey) => void;
 };
 export function HeroSection({
   images,
   logoSrc,
-  className
+  className,
+  onFeatureSelect
 }: Props) {
   const reduced = useReducedMotion();
   const heroRef = React.useRef<HTMLElement | null>(null);
@@ -139,7 +143,11 @@ export function HeroSection({
                 }, {
                   title: "إرسال آمن",
                   desc: "بالبريد السريع"
-                }].map((f, idx) => <motion.div key={f.title} className="h-full" initial={reduced ? undefined : {
+                }].map((f, idx) => <motion.button type="button" key={f.title} aria-label={`تفاصيل: ${f.title}`} onClick={() => onFeatureSelect?.(([
+                "organize",
+                "translate",
+                "ship"
+              ][idx] as HeroFeatureKey))} className="h-full text-right sm:text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" initial={reduced ? undefined : {
                   opacity: 0,
                   y: 14,
                   scale: 0.98
@@ -192,7 +200,7 @@ export function HeroSection({
                           </div>
                         </div>
                       </Card>
-                    </motion.div>)}
+                    </motion.button>)}
                 </div>
               </motion.div>
 

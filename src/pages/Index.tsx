@@ -19,11 +19,24 @@ import { SectionShell } from "@/components/citta/SectionShell";
 import { SiteHeader } from "@/components/citta/SiteHeader";
 import { WhatsappFloat } from "@/components/citta/WhatsappFloat";
 import logo from "@/assets/citta-trad-logo.png";
-import { HeroSection } from "@/components/citta/HeroSection";
+import { HeroSection, type HeroFeatureKey } from "@/components/citta/HeroSection";
 import { PromiseBand } from "@/components/citta/PromiseBand";
+import { ServiceQuickFocus } from "@/components/citta/ServiceQuickFocus";
 const WHATSAPP_PHONE = "+212725989892";
 const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفادة من خدمة إعداد ملفات الجنسية الإيطالية.";
 const Index = () => {
+  const [serviceFocus, setServiceFocus] = React.useState<HeroFeatureKey>("organize");
+  const serviceFocusRef = React.useRef<HTMLDivElement | null>(null);
+
+  const onHeroFeatureSelect = React.useCallback((key: HeroFeatureKey) => {
+    setServiceFocus(key);
+    // redirect داخل نفس الصفحة + scroll
+    window.history.replaceState(null, "", "#service");
+    window.setTimeout(() => {
+      serviceFocusRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  }, []);
+
   const heroImages = React.useMemo(() => [{
     src: heroVenice,
     alt: "البندقية – إيطاليا (قنوات وجسور)"
@@ -48,7 +61,7 @@ const Index = () => {
 
       <main>
         {/* HERO (rebuilt) */}
-        <HeroSection images={heroImages} logoSrc={logo} />
+        <HeroSection images={heroImages} logoSrc={logo} onFeatureSelect={onHeroFeatureSelect} />
 
         {/* PROMISE (under hero) */}
         <PromiseBand />
@@ -136,6 +149,13 @@ const Index = () => {
               </p>
               </Card>
             </Reveal>
+          </div>
+
+          {/* Focus details (small + modern) */}
+          <div ref={n => {
+          serviceFocusRef.current = n;
+        }} className="mt-10">
+            <ServiceQuickFocus selected={serviceFocus} onSelect={setServiceFocus} />
           </div>
         </SectionShell>
 
