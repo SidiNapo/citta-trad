@@ -27,16 +27,17 @@ const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفا
 const Index = () => {
   const [serviceFocus, setServiceFocus] = React.useState<HeroFeatureKey>("organize");
   const serviceFocusRef = React.useRef<HTMLDivElement | null>(null);
-
   const onHeroFeatureSelect = React.useCallback((key: HeroFeatureKey) => {
     setServiceFocus(key);
     // redirect داخل نفس الصفحة + scroll
     window.history.replaceState(null, "", "#service");
     window.setTimeout(() => {
-      serviceFocusRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      serviceFocusRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
     }, 50);
   }, []);
-
   const heroImages = React.useMemo(() => [{
     src: heroVenice,
     alt: "البندقية – إيطاليا (قنوات وجسور)"
@@ -82,9 +83,9 @@ const Index = () => {
             src: aboutOfficeImg,
             alt: "مكتب إيطالي راقي مع وثائق رسمية"
           }, {
-              src: apostilleImg,
-              alt: "توثيق وأبوستيل للوثائق بشكل رسمي"
-            }, {
+            src: apostilleImg,
+            alt: "توثيق وأبوستيل للوثائق بشكل رسمي"
+          }, {
             src: aboutDocsImg,
             alt: "ملف جنسية إيطالية مرتب بختم ذهبي"
           }]} />
@@ -144,8 +145,7 @@ const Index = () => {
               </ol>
               <Separator className="my-5" />
               <p className="text-sm leading-relaxed text-muted-foreground">
-                هاد الصفحة معمولة باش تعاون الناس يفهمو الخدمة، وفيها كلمات مفتاحية مرتبطة بملف الجنسية الإيطالية، الترجمة
-                المحلفة، الأبوستيل، وتجهيز الوثائق للمغاربة المقيمين بإيطاليا — باش تقوّي السيو ديال الموقع بشكل طبيعي.
+                هاد الصفحة معمولة باش تعاون الناس يفهمو الخدمة، وفيها كلمات مفتاحية مرتبطة بملف الجنسية الإيطالية، الترجمة المحلفة، الأبوستيل، وتجهيز الوثائق للمغاربة المقيمين بإيطاليا. 
               </p>
               </Card>
             </Reveal>
