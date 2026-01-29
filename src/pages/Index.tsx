@@ -24,6 +24,29 @@ import { PromiseBand } from "@/components/citta/PromiseBand";
 import { ServiceQuickFocus } from "@/components/citta/ServiceQuickFocus";
 const WHATSAPP_PHONE = "+212725989892";
 const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفادة من خدمة إعداد ملفات الجنسية الإيطالية.";
+
+const SEO_JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://citta-trad.com/#organization",
+      name: "Citta‑Trad",
+      url: "https://citta-trad.com/",
+      logo: "https://citta-trad.com/favicon.png",
+      description:
+        "خدمة إعداد ملفات الجنسية الإيطالية للمغاربة: تنظيم الوثائق، ترجمة محلفة، أبوستيل، وترتيب الملف مع إرسال آمن.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://citta-trad.com/#website",
+      url: "https://citta-trad.com/",
+      name: "Citta‑Trad",
+      publisher: { "@id": "https://citta-trad.com/#organization" },
+    },
+  ],
+} as const;
+
 const Index = () => {
   const [serviceFocus, setServiceFocus] = React.useState<HeroFeatureKey>("organize");
   const serviceFocusRef = React.useRef<HTMLDivElement | null>(null);
@@ -60,6 +83,12 @@ const Index = () => {
       <SiteHeader />
 
       <main>
+        {/* SEO: structured data (no UI impact) */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(SEO_JSON_LD) }}
+        />
         {/* HERO (rebuilt) */}
         <HeroSection images={heroImages} logoSrc={logo} onFeatureSelect={onHeroFeatureSelect} />
 
