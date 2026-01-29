@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { CheckCircle2, MessageCircle, Send, ShieldCheck, Timer } from "lucide-react";
+import { Seo } from "@/components/Seo";
 import heroVenice from "@/assets/hero-venice.jpg";
 import heroRome from "@/assets/hero-rome.jpg";
 import heroFlorence from "@/assets/hero-florence.jpg";
@@ -24,7 +25,8 @@ import { PromiseBand } from "@/components/citta/PromiseBand";
 import { ServiceQuickFocus } from "@/components/citta/ServiceQuickFocus";
 const WHATSAPP_PHONE = "+212725989892";
 const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفادة من خدمة إعداد ملفات الجنسية الإيطالية.";
-const Index = () => {
+
+export function HomeLanding({ canonicalPath = "/" }: { canonicalPath?: string }) {
   const [serviceFocus, setServiceFocus] = React.useState<HeroFeatureKey>("organize");
   const serviceFocusRef = React.useRef<HTMLDivElement | null>(null);
   const onHeroFeatureSelect = React.useCallback((key: HeroFeatureKey) => {
@@ -58,6 +60,37 @@ const Index = () => {
     alt: "توسكانا – إيطاليا (تلال وسرو)"
   }], []);
   return <div className="min-h-screen bg-background">
+      <Seo
+        lang="ar"
+        dir="rtl"
+        title="Citta-Trad | الترجمة المحلفة + إعداد ملفات الجنسية الإيطالية"
+        description="Citta‑Trad كتعاون المغاربة فالمغرب وبإيطاليا: ترجمة محلفة/assermentée، أبوستيل، وتجهيز ملفات الجنسية الإيطالية بدقة وإرسال آمن."
+        canonicalPath={canonicalPath}
+        alternates={{
+          ar: "/ar",
+          fr: "/fr",
+          "x-default": "/"
+        }}
+        og={{
+          type: "website",
+          imagePath: "/favicon.png"
+        }}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Citta‑Trad",
+            url: "https://citta-trad.com/",
+            logo: "https://citta-trad.com/favicon.png"
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Citta‑Trad",
+            url: "https://citta-trad.com/"
+          }
+        ]}
+      />
       <SiteHeader />
 
       <main>
@@ -244,4 +277,9 @@ const Index = () => {
       <ScrollArrows />
     </div>;
 };
+
+const Index = () => {
+  return <HomeLanding canonicalPath="/" />;
+};
+
 export default Index;
