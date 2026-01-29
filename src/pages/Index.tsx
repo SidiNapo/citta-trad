@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { CheckCircle2, MessageCircle, Send, ShieldCheck, Timer } from "lucide-react";
-import { Seo } from "@/components/Seo";
 import heroVenice from "@/assets/hero-venice.jpg";
 import heroRome from "@/assets/hero-rome.jpg";
 import heroFlorence from "@/assets/hero-florence.jpg";
@@ -25,21 +24,19 @@ import { PromiseBand } from "@/components/citta/PromiseBand";
 import { ServiceQuickFocus } from "@/components/citta/ServiceQuickFocus";
 const WHATSAPP_PHONE = "+212725989892";
 const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفادة من خدمة إعداد ملفات الجنسية الإيطالية.";
-
-export function HomeLanding({ canonicalPath = "/" }: { canonicalPath?: string }) {
+const Index = () => {
   const [serviceFocus, setServiceFocus] = React.useState<HeroFeatureKey>("organize");
   const serviceFocusRef = React.useRef<HTMLDivElement | null>(null);
+
   const onHeroFeatureSelect = React.useCallback((key: HeroFeatureKey) => {
     setServiceFocus(key);
     // redirect داخل نفس الصفحة + scroll
     window.history.replaceState(null, "", "#service");
     window.setTimeout(() => {
-      serviceFocusRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+      serviceFocusRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);
   }, []);
+
   const heroImages = React.useMemo(() => [{
     src: heroVenice,
     alt: "البندقية – إيطاليا (قنوات وجسور)"
@@ -60,37 +57,6 @@ export function HomeLanding({ canonicalPath = "/" }: { canonicalPath?: string })
     alt: "توسكانا – إيطاليا (تلال وسرو)"
   }], []);
   return <div className="min-h-screen bg-background">
-      <Seo
-        lang="ar"
-        dir="rtl"
-        title="Citta-Trad | الترجمة المحلفة + إعداد ملفات الجنسية الإيطالية"
-        description="Citta‑Trad كتعاون المغاربة فالمغرب وبإيطاليا: ترجمة محلفة/assermentée، أبوستيل، وتجهيز ملفات الجنسية الإيطالية بدقة وإرسال آمن."
-        canonicalPath={canonicalPath}
-        alternates={{
-          ar: "/ar",
-          fr: "/fr",
-          "x-default": "/"
-        }}
-        og={{
-          type: "website",
-          imagePath: "/favicon.png"
-        }}
-        jsonLd={[
-          {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Citta‑Trad",
-            url: "https://citta-trad.com/",
-            logo: "https://citta-trad.com/favicon.png"
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: "Citta‑Trad",
-            url: "https://citta-trad.com/"
-          }
-        ]}
-      />
       <SiteHeader />
 
       <main>
@@ -116,9 +82,9 @@ export function HomeLanding({ canonicalPath = "/" }: { canonicalPath?: string })
             src: aboutOfficeImg,
             alt: "مكتب إيطالي راقي مع وثائق رسمية"
           }, {
-            src: apostilleImg,
-            alt: "توثيق وأبوستيل للوثائق بشكل رسمي"
-          }, {
+              src: apostilleImg,
+              alt: "توثيق وأبوستيل للوثائق بشكل رسمي"
+            }, {
             src: aboutDocsImg,
             alt: "ملف جنسية إيطالية مرتب بختم ذهبي"
           }]} />
@@ -178,7 +144,8 @@ export function HomeLanding({ canonicalPath = "/" }: { canonicalPath?: string })
               </ol>
               <Separator className="my-5" />
               <p className="text-sm leading-relaxed text-muted-foreground">
-                هاد الصفحة معمولة باش تعاون الناس يفهمو الخدمة، وفيها كلمات مفتاحية مرتبطة بملف الجنسية الإيطالية، الترجمة المحلفة، الأبوستيل، وتجهيز الوثائق للمغاربة المقيمين بإيطاليا. 
+                هاد الصفحة معمولة باش تعاون الناس يفهمو الخدمة، وفيها كلمات مفتاحية مرتبطة بملف الجنسية الإيطالية، الترجمة
+                المحلفة، الأبوستيل، وتجهيز الوثائق للمغاربة المقيمين بإيطاليا — باش تقوّي السيو ديال الموقع بشكل طبيعي.
               </p>
               </Card>
             </Reveal>
@@ -277,9 +244,4 @@ export function HomeLanding({ canonicalPath = "/" }: { canonicalPath?: string })
       <ScrollArrows />
     </div>;
 };
-
-const Index = () => {
-  return <HomeLanding canonicalPath="/" />;
-};
-
 export default Index;

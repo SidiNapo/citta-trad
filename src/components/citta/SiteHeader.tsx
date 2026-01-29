@@ -1,10 +1,8 @@
-import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { FileText, Home, Info, Phone, Workflow } from "lucide-react";
 import logo from "@/assets/citta-trad-logo.png";
 import { MobileNav } from "@/components/citta/MobileNav";
-import { useLocation } from "react-router-dom";
 
 type NavItem = {
   href: string;
@@ -20,11 +18,6 @@ const items: NavItem[] = [
 ];
 
 export function SiteHeader() {
-  const location = useLocation();
-  const isFr = location.pathname.startsWith("/fr");
-  const langHref = isFr ? "/ar" : "/fr";
-  const langLabel = isFr ? "AR" : "FR";
-
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="container h-18 md:h-16">
@@ -50,15 +43,6 @@ export function SiteHeader() {
                 className="h-16 w-auto"
                 loading="eager"
               />
-              <Button
-                asChild
-                variant="premium"
-                size="sm"
-                className="rounded-full"
-                aria-label={isFr ? "Passer en arabe" : "Passer en français"}
-              >
-                <a href={langHref}>{langLabel}</a>
-              </Button>
             </div>
           </a>
 
@@ -92,9 +76,6 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button asChild variant="premium" size="sm" className="rounded-full" aria-label={isFr ? "Passer en arabe" : "Passer en français"}>
-              <a href={langHref}>{isFr ? "العربية" : "Français"}</a>
-            </Button>
             <Button asChild variant="hero" size="pill" className="rounded-full shadow-elegant">
               <a href="#service" aria-label="اكتشف الخدمة">
                 <FileText className="h-4 w-4" />

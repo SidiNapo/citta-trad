@@ -108,7 +108,9 @@ export function HeroSection({
                   <span className="block">بوابتك نحو الجنسية الإيطالية</span>
                 </h1>
 
-                
+                <p className="mt-4 text-lg leading-relaxed md:text-xl text-muted-foreground font-medium text-center">
+                  خدمة شاملة للمغاربة المقيمين بإيطاليا
+                </p>
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
                   <Button asChild variant="hero" size="pill" className="gap-2">
