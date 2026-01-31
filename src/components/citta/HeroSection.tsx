@@ -199,30 +199,6 @@ export function HeroSection({
                 </div>
               </motion.div>
 
-              {/* Right side: elegant “promise” preview card (kept compact) */}
-              <motion.div className="mx-auto w-full max-w-xl" initial={reduced ? undefined : {
-              opacity: 0,
-              y: 26,
-              scale: 0.98,
-              filter: "blur(10px)"
-            }} animate={reduced ? undefined : {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              filter: "blur(0px)"
-            }} transition={reduced ? undefined : {
-              duration: 0.85,
-              delay: 0.1,
-              ease: [0.2, 0.8, 0.2, 1]
-            }}>
-                <Card className="surface-glass p-6 text-center">
-                  <div className="text-sm font-semibold">وعد Citta‑Trad</div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    الخدمة ديالك بلا ما تحرك من دارك: كنراجعو الوثائق، كنصلحو المعطيات، كنجهزو الملف بحال اللي غادي يتقدم
-                    لجهة رسمية… ومن بعد كنرسلوه بأمان.
-                  </p>
-                </Card>
-              </motion.div>
             </div>
           </div>
         </div>
