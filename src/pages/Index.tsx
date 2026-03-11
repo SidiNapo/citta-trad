@@ -28,23 +28,23 @@ const WHATSAPP_MESSAGE = "السلام عليكم، أرغب في الاستفا
 const SEO_JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://citta-trad.com/#organization",
-      name: "Citta‑Trad",
-      url: "https://citta-trad.com/",
-      logo: "https://citta-trad.com/favicon.png",
-      description:
-        "خدمة إعداد ملفات الجنسية الإيطالية للمغاربة: تنظيم الوثائق، ترجمة محلفة، أبوستيل، وترتيب الملف مع إرسال آمن.",
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://citta-trad.com/#website",
-      url: "https://citta-trad.com/",
-      name: "Citta‑Trad",
-      publisher: { "@id": "https://citta-trad.com/#organization" },
-    },
-  ],
+  {
+    "@type": "Organization",
+    "@id": "https://citta-trad.com/#organization",
+    name: "Citta‑Trad",
+    url: "https://citta-trad.com/",
+    logo: "https://citta-trad.com/favicon.png",
+    description:
+    "خدمة إعداد ملفات الجنسية الإيطالية للمغاربة: تنظيم الوثائق، ترجمة محلفة، أبوستيل، وترتيب الملف مع إرسال آمن."
+  },
+  {
+    "@type": "WebSite",
+    "@id": "https://citta-trad.com/#website",
+    url: "https://citta-trad.com/",
+    name: "Citta‑Trad",
+    publisher: { "@id": "https://citta-trad.com/#organization" }
+  }]
+
 } as const;
 
 const Index = () => {
@@ -85,10 +85,10 @@ const Index = () => {
       <main>
         {/* SEO: structured data (no UI impact) */}
         <script
-          type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(SEO_JSON_LD) }}
-        />
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(SEO_JSON_LD) }} />
+      
         {/* HERO (rebuilt) */}
         <HeroSection images={heroImages} logoSrc={logo} onFeatureSelect={onHeroFeatureSelect} />
 
@@ -111,9 +111,9 @@ const Index = () => {
             src: aboutOfficeImg,
             alt: "مكتب إيطالي راقي مع وثائق رسمية"
           }, {
-              src: apostilleImg,
-              alt: "توثيق وأبوستيل للوثائق بشكل رسمي"
-            }, {
+            src: apostilleImg,
+            alt: "توثيق وأبوستيل للوثائق بشكل رسمي"
+          }, {
             src: aboutDocsImg,
             alt: "ملف جنسية إيطالية مرتب بختم ذهبي"
           }]} />
@@ -127,7 +127,7 @@ const Index = () => {
               <Card className="p-6 shadow-elegant">
               <h3 className="text-lg font-semibold">🔹 تشمل الخدمة:</h3>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                {["جمع الوثائق المطلوبة", "تصحيحها وملاءمتها للمعلومات الشخصية", "المصادقة عليها بشهادة الأبوستيل لدى العمالة", "ترتيب الملف", "ترجمة الوثائق ترجمة محلفة خالية من الأخطاء", "المصادقة على الترجمة بشهادة الأبوستيل بالمحكمة الابتدائية", "إعادة ترتيب الملف", "إرسال الوثائق مباشرة للزبون عبر البريد السريع"].map(item => <li key={item} className="flex items-start gap-2">
+                {["جمع الوثائق المطلوبة", "تصحيحها وملاءمتها للمعلومات الشخصية", "المصادقة عليها بشهادة الأبوستيل لدى العمالة", "ترتيب الملف", "ترجمة الوثائق ترجمة محلفة خالية من الأخطاء", "المصادقة على الترجمة بشهادة الأبوستيل بالمحكمة الابتدائية", "إعادة ترتيب الملف", "إرسال الوثائق مباشرة للزبون عبر البريد السريع"].map((item) => <li key={item} className="flex items-start gap-2">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
                     <span className="text-sm leading-relaxed">{item}</span>
                   </li>)}
@@ -135,7 +135,7 @@ const Index = () => {
 
               <Separator className="my-6" />
               <div className="grid gap-3 sm:grid-cols-3">
-                {["الخدمة ديالك بلا ما تحرك من دارك", "كلشي بين يديك غير بكليك واحد", "الوقت ديالك محفوظ، الخدمة بلا صداع"].map(t => <div key={t} className="rounded-xl border bg-card p-4">
+                {["الخدمة ديالك بلا ما تحرك من دارك", "كلشي بين يديك غير بكليك واحد", "الوقت ديالك محفوظ، الخدمة بلا صداع"].map((t) => <div key={t} className="rounded-xl border bg-card p-4">
                       <div className="text-sm font-semibold">{t}</div>
                     </div>)}
               </div>
@@ -172,16 +172,16 @@ const Index = () => {
                   </li>)}
               </ol>
               <Separator className="my-5" />
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                هاد الصفحة معمولة باش تعاون الناس يفهمو الخدمة، وفيها كلمات مفتاحية مرتبطة بملف الجنسية الإيطالية، الترجمة
-                المحلفة، الأبوستيل، وتجهيز الوثائق للمغاربة المقيمين بإيطاليا — باش تقوّي السيو ديال الموقع بشكل طبيعي.
-              </p>
+              
+
+
+              
               </Card>
             </Reveal>
           </div>
 
           {/* Focus details (small + modern) */}
-          <div ref={n => {
+          <div ref={(n) => {
           serviceFocusRef.current = n;
         }} className="mt-10">
             <ServiceQuickFocus selected={serviceFocus} onSelect={setServiceFocus} />
@@ -222,7 +222,7 @@ const Index = () => {
                 }, {
                   icon: Send,
                   t: "مباشر"
-                }].map(it => <div key={it.t} className="flex items-center gap-2 rounded-xl border bg-background/50 px-3 py-2">
+                }].map((it) => <div key={it.t} className="flex items-center gap-2 rounded-xl border bg-background/50 px-3 py-2">
                       <it.icon className="h-4 w-4" />
                       <span className="text-xs font-semibold">{it.t}</span>
                     </div>)}
